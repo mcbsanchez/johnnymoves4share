@@ -1,9 +1,11 @@
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Driver {
 
     public static void main(String[] args)
     {
+        Calendar cal = Calendar.getInstance();
         double[][] size = {{9, 14, 1}, {12, 18, 3}, {12, 10, 5}, {14, 11, 7}, {18, 12, 9}, {20, 16, 12}};
 
         ArrayList<Item> items = new ArrayList<>();
@@ -20,6 +22,8 @@ public class Driver {
         parcel.setType(7);
         parcel.setType(0);
         System.out.println(parcel.getType());
+
+        cal.add(Calendar.DAY_OF_YEAR, 1);
 
 
     }

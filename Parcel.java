@@ -2,14 +2,6 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class Parcel {
-    private boolean[] available = {false,false,false,false,false,false};
-    private static String[] CURRENTSTATUS = {"PREPARING","SHIPPING","DELIVERED"};
-    private static String[] PARCELTYPE = {"FLAT","BOX"};
-    private String recipient;
-    private String destination;
-    private int countItems;
-    private ArrayList <Item> items;
-
 
     public Parcel (String recipient, String destination, int countItems)
     {
@@ -204,4 +196,35 @@ public class Parcel {
             if ()
         }
     }
+    public void setType(int n)
+    {
+        if(n < 2)
+        {
+            type = PARCELTYPE[0];
+            size = SIZES[n];
+        }
+        else if(n >= 2 && n < 6)
+        {
+            type = PARCELTYPE[1]
+            size = SIZES[n];
+        }
+        else
+        {
+            System.out.println("Invalid");
+        }
+    }
+    public String getType()
+    {
+        return type;
+    }
+    private boolean[] available = {false,false,false,false,false,false};
+    private double[][] SIZES = {{9, 14, 1}, {12, 18, 3}, {12, 10, 5}, {14, 11, 7}, {18, 12, 9}, {20, 16, 12}};
+    private static String[] CURRENTSTATUS = {"PREPARING","SHIPPING","DELIVERED"};
+    private static String[] PARCELTYPE = {"FLT","BOX"};
+    private String type;
+    private double[] size;
+    private String recipient;
+    private String destination;
+    private int countItems;
+    private ArrayList <Item> items;
 }

@@ -204,7 +204,12 @@ public class Parcel {
         }
         return totalWeight > 3;
     }
+<<<<<<< Updated upstream
     public double computeBaseFee()
+=======
+
+    public void setType(int n)
+>>>>>>> Stashed changes
     {
         int i;
         if (/*pType*/ == "FLAT")
@@ -216,7 +221,67 @@ public class Parcel {
         }
         for (i = 0; i < items.size(); i++)
         {
+<<<<<<< Updated upstream
             if ()
         }
     }
+=======
+            System.out.println("Invalid input.");
+        }
+    }
+
+    public double getBaseFee()
+    {
+        int i;
+        double baseFee = 0;
+
+        if (type == PARCELTYPE[0]) // FLAT
+        {
+            if (size == SIZES[0])
+                return 30;
+           else
+               return 50;
+        }
+        else // BOX
+        {
+            for (i = 0; i < items.size(); i++)
+            {
+                if (items.get(i) instanceof Document || items.get(i) instanceof Product)
+                {
+                    baseFee += 40 * items.get(i).getWeight();
+                }
+                else
+                {
+                    if ((items.get(i).getLength() * items.get(i).getWidth() * items.get(i).getHeight() / 305) * 30 > 40 * items.get(i).getWeight())
+                        baseFee += 30 * (items.get(i).getLength() * items.get(i).getWidth() * items.get(i).getHeight() / 305);
+                    else
+                        baseFee += 40 * items.get(i).getWeight();
+
+                }
+            }
+
+            return baseFee;
+        }
+    }
+
+
+
+
+    public String getType()
+    {
+        return type;
+    }
+
+    private boolean[] available = {false,false,false,false,false,false};
+    private double[][] SIZES = {{9, 14, 1}, {12, 18, 3}, {12, 10, 5}, {14, 11, 7}, {18, 12, 9}, {20, 16, 12}};
+    private static String[] CURRENTSTATUS = {"PREPARING","SHIPPING","DELIVERED"};
+    private static String[] PARCELTYPE = {"FLT","BOX"};
+
+    private String type;
+    private double[] size;
+    private String recipient;
+    private String destination;
+    private int countItems;
+    private ArrayList <Item> items;
+>>>>>>> Stashed changes
 }

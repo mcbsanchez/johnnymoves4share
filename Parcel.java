@@ -2,14 +2,6 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class Parcel {
-    private boolean[] available = {false,false,false,false,false,false};
-    private static String[] CURRENTSTATUS = {"PREPARING","SHIPPING","DELIVERED"};
-    private static String[] PARCELTYPE = {"FLAT","BOX"};
-    private String recipient;
-    private String destination;
-    private int countItems;
-    private ArrayList <Item> items;
-
 
     public Parcel (String recipient, String destination, int countItems)
     {
@@ -23,20 +15,6 @@ public class Parcel {
         this.items = items;
     }
 
-    public void setType (int n)
-    {
-        double[][] available = showAvailableParcels();
-        pType[]
-        int i;
-
-        for (i = 0; i < available[].length - 1; i++)
-        {
-            if (n == i + 1)
-                pType
-        }
-
-    }
-
     public void showAvailableParcels(double[][]size)
     {
         /*
@@ -47,7 +25,6 @@ public class Parcel {
          */
         int i, j, k, c = 0, choice = 1;
         boolean tempAvailable[] = {false, false, false, false, false, false};
-        this.items = items;
         if (items.size() == 1)
         {
             if (!isTooHeavy(items))
@@ -133,12 +110,14 @@ public class Parcel {
         }
 
     }
+
     private double[][]createNewSpace(double[][] size,int i, double[] item)
     {
         return new double[][]{  {size[i][0] - item[0], size[i][1], size[i][2]},
                                 {size[i][0], size[i][1] - item[1], size[i][2]},
                                 {size[i][0], size[i][1], size[i][2] - item[2]}};
     }
+
     private boolean isFit(double[][] size, ArrayList<Item> items)
     {
         int i, j, k, c = 0;
@@ -204,28 +183,27 @@ public class Parcel {
         }
         return totalWeight > 3;
     }
-<<<<<<< Updated upstream
-    public double computeBaseFee()
-=======
 
     public void setType(int n)
->>>>>>> Stashed changes
     {
-        int i;
-        if (/*pType*/ == "FLAT")
+        if(n < 2)
         {
-            if (/*dimension*/ == /*given dimension1*/)
-                return 30;
-            else
-                return 50;
+            if(available[n])
+            {
+                type = PARCELTYPE[0];
+                size = SIZES[n];
+            }
         }
-        for (i = 0; i < items.size(); i++)
+        else if(n >= 2 && n < 6)
         {
-<<<<<<< Updated upstream
-            if ()
+            if(available[n])
+            {
+                type = PARCELTYPE[1];
+                size = SIZES[n];
+            }
         }
-    }
-=======
+        else
+        {
             System.out.println("Invalid input.");
         }
     }
@@ -283,5 +261,4 @@ public class Parcel {
     private String destination;
     private int countItems;
     private ArrayList <Item> items;
->>>>>>> Stashed changes
 }

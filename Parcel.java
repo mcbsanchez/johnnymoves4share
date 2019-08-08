@@ -9,13 +9,14 @@ public class Parcel {
     private int countItems;
 
 
-    public Parcel (String recipient, String destination, int countItems) {
+    public Parcel (String recipient, String destination, int countItems)
+    {
         this.recipient = recipient;
         this.destination = destination;
         this.countItems = countItems;
     }
-
-    public void addItem(ArrayList<Item> items, double[][]size) {
+    public void addItem(ArrayList<Item> items, double[][]size)
+    {
         /*
         i - number of spaces
         j - number of rotations
@@ -25,6 +26,7 @@ public class Parcel {
         int i, j, k, c = 0;
         boolean tempAvailable[] = {false, false, false, false, false, false};
         if (items.size() == 1)
+        {
             if (!isTooHeavy(items))
             {
                 for (i = 0; i < 2; i++)
@@ -32,7 +34,7 @@ public class Parcel {
                     {
                         for (k = 0; k < 3; k++)
                         {
-                            if (size[i][k] > items.get(i).rotate(j)[k])
+                            if (size[i][k] >= items.get(0).rotate(j)[k])
                                 c++;
                             if (c == 3)
                                 available[i] = true;
@@ -40,21 +42,19 @@ public class Parcel {
                         c = 0;
                     }
             }
-            else
-            {
-                for (i = 2; i < 6; i++)
-                    for (j = 0; j < 6; j++)
+            for (i = 2; i < 6; i++)
+                for (j = 0; j < 6; j++)
+                {
+                    for (k = 0; k < 3; k++)
                     {
-                        for (k = 0; k < 3; k++)
-                        {
-                            if (size[i][k] > items.get(i).rotate(j)[k])
-                                c++;
-                            if (c == 3)
-                                available[i] = true;
-                        }
-                        c = 0;
+                        if (size[i][k] >= items.get(0).rotate(j)[k])
+                            c++;
+                        if (c == 3)
+                            available[i] = true;
                     }
-            }
+                    c = 0;
+                }
+        }
         else
         {
             if (!isTooHeavy(items))
@@ -65,7 +65,7 @@ public class Parcel {
                     {
                         for (k = 0; k < 3; k++)
                         {
-                            if (size[i][k] > items.get(i).rotate(j)[k])
+                            if (size[i][k] >= items.get(0).rotate(j)[k])
                                 c++;
                             if (c == 3)
                                 tempAvailable[j] = true;
@@ -74,32 +74,38 @@ public class Parcel {
                     }
                     for (j = 0; j < 6; j++) {
                         if (tempAvailable[j])
-                            available[i] = isFit(createNewSpace(size, i, items.get(i).rotate(j)), items);
+                            available[i] = isFit(createNewSpace(size, i, items.get(0).rotate(j)), items);
                         tempAvailable[j] = false;
                     }
                 }
             }
-            else{
-                for (i = 2; i < 6; i++)
+            for (i = 2; i < 6; i++)
+            {
+                for (j = 0; j < 6; j++)
                 {
-                    for (j = 0; j < 6; j++)
+                    for (k = 0; k < 3; k++)
                     {
-                        for (k = 0; k < 3; k++)
-                        {
-                            if (size[i][k] > items.get(i).rotate(j)[k])
-                                c++;
-                            if (c == 3)
-                                tempAvailable[j] = true;
-                        }
-                        c = 0;
+                        if (size[i][k] >= items.get(0).rotate(j)[k])
+                            c++;
+                        if (c == 3)
+                            tempAvailable[j] = true;
                     }
-                    for (j = 0; j < 6; j++) {
-                        if (tempAvailable[j])
-                            available[i] = isFit(createNewSpace(size, i, items.get(i).rotate(j)), items);
+                    c = 0;
+                }
+                for (j = 0; j < 6; j++)
+                {
+                    if (tempAvailable[j])
+                    {
+                        available[i] = isFit(createNewSpace(size, i, items.get(0).rotate(j)), items);
                         tempAvailable[j] = false;
                     }
                 }
             }
+
+        }
+        for(i = 0; i < 6; i++)
+        {
+            System.out.println(available[i]);
         }
 
     }
@@ -112,24 +118,56 @@ public class Parcel {
     private boolean isFit(double[][] size, ArrayList<Item> items)
     {
         int i, j, k, c = 0;
+        double[][] newSize;
         boolean condition = false;
-        if(items.size() == 0)
-            condition = true;
+        boolean[] test = {false,false,false,false,false,false};
+        if(items.size() == 1)
+        {
+            for (i = 0; i < 3; i++) {
+                for (j = 0; j < 6; j++) {
+
+                    for (k = 0; k < 3; k++) {
+                        if (size[i][k] >= items.get(0).rotate(j)[k])
+                            c++;
+                        if (c == 3) {
+                            test[j] = true;
+                        }
+                    }
+                    c = 0;
+                }
+                for (j = 0; j < 6; j++) {
+                    if (test[j]) {
+                        condition = true;
+                        test[j] = false;
+                    }
+                }
+            }
+        }
         else
         {
             items.remove(0);
-            for(i = 0; i < 3; i++)
-                for(j = 0; j < 6; j++)
-                    for(k = 0; k < 3; k++)
+            for(i = 0; i < 3; i++) {
+                for (j = 0; j < 6; j++) {
+
+                    for (k = 0; k < 3; k++)
                     {
-                        if ((size[i][k] > items.get(i).rotate(j)[k]))
+                        if (size[i][k] >= items.get(0).rotate(j)[k])
                             c++;
-                        if (c == 3)
-                            condition = isFit(createNewSpace(size,i,items.get(i).rotate(j)),items);
+                        if (c == 3) {
+                            test[j] = true;
+                        }
                     }
+                    c = 0;
+                }
+                for (j = 0; j < 6; j++) {
+                    if (test[j]) {
+                        condition = isFit(createNewSpace(size, i, items.get(0).rotate(j)), items);
+                        test[j] = false;
+                    }
+                }
+            }
         }
         return condition;
-
     }
 
     private boolean isTooHeavy(ArrayList<Item> items)
@@ -142,4 +180,8 @@ public class Parcel {
         }
         return totalWeight > 3;
     }
+//    public double computeBaseFee()
+//    {
+//
+//    }
 }

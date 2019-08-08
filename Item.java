@@ -21,7 +21,7 @@ public abstract class Item
         double l = getLength();
         double h = getHeight();
         double w = getWidth();
-        double[] dimensions = new double[]{l,w,h};
+        double[] dimensions = {l, w, h};
         if(orientation == 1)
             dimensions = new double[]{h, l, w};
         else if(orientation == 2)

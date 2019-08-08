@@ -11,6 +11,7 @@ public class Driver {
         items.add(new Product(4,4,1,1));
         Parcel parcel = new Parcel("Martin","Metro Manila",items.size());
         parcel.addItem(items);
+        parcel.showAvailableParcels(size);
 
 
     }

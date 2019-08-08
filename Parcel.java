@@ -15,7 +15,7 @@ public class Parcel {
         this.items = items;
     }
 
-    public double[][] showAvailableParcels(double[][]size)
+    public void showAvailableParcels(double[][]size)
     {
         /*
         i - number of spaces
@@ -104,9 +104,14 @@ public class Parcel {
             }
 
         }
+        System.out.println("Available Parcel Size");
         for(i = 0; i < 6; i++)
         {
-            System.out.println(available[i]);
+            if(available[i])
+                if(i < 2)
+                        System.out.println("FLAT PARCEL( "+SIZES[i][0]+" x "+SIZES[i][1]+" x "+SIZES[i][2]+" )");
+                else
+                        System.out.println("BOX PARCEL( "+SIZES[i][0]+" x "+SIZES[i][1]+" x "+SIZES[i][2]+" )");
         }
 
     }
@@ -181,32 +186,38 @@ public class Parcel {
         }
         return totalWeight > 3;
     }
-    public double computeBaseFee()
-    {
-        int i;
-        if (/*pType*/ == "FLAT")
-        {
-            if (/*dimension*/ == /*given dimension1*/)
-                return 30;
-            else
-                return 50;
-        }
-        for (i = 0; i < items.size(); i++)
-        {
-            if ()
-        }
-    }
+//    public double computeBaseFee()
+//    {
+//        int i;
+//        if (/*pType*/ == "FLAT")
+//        {
+//            if (/*dimension*/ == /*given dimension1*/)
+//                return 30;
+//            else
+//                return 50;
+//        }
+//        for (i = 0; i < items.size(); i++)
+//        {
+//            if ()
+//        }
+//    }
     public void setType(int n)
     {
         if(n < 2)
         {
-            type = PARCELTYPE[0];
-            size = SIZES[n];
+            if(available[n])
+            {
+                type = PARCELTYPE[0];
+                size = SIZES[n];
+            }
         }
         else if(n >= 2 && n < 6)
         {
-            type = PARCELTYPE[1]
-            size = SIZES[n];
+            if(available[n])
+            {
+                type = PARCELTYPE[1];
+                size = SIZES[n];
+            }
         }
         else
         {
@@ -217,6 +228,7 @@ public class Parcel {
     {
         return type;
     }
+
     private boolean[] available = {false,false,false,false,false,false};
     private double[][] SIZES = {{9, 14, 1}, {12, 18, 3}, {12, 10, 5}, {14, 11, 7}, {18, 12, 9}, {20, 16, 12}};
     private static String[] CURRENTSTATUS = {"PREPARING","SHIPPING","DELIVERED"};

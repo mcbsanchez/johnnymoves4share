@@ -23,7 +23,21 @@ public class Parcel {
         this.items = items;
     }
 
-    public double[][] showAvailableParcels(double[][]size)
+    public void setType (int n)
+    {
+        double[][] available = showAvailableParcels();
+        pType[]
+        int i;
+
+        for (i = 0; i < available[].length - 1; i++)
+        {
+            if (n == i + 1)
+                pType
+        }
+
+    }
+
+    public void showAvailableParcels(double[][]size)
     {
         /*
         i - number of spaces
@@ -31,7 +45,7 @@ public class Parcel {
         k - number of sides
         c - number of difference above negative
          */
-        int i, j, k, c = 0;
+        int i, j, k, c = 0, choice = 1;
         boolean tempAvailable[] = {false, false, false, false, false, false};
         this.items = items;
         if (items.size() == 1)
@@ -114,7 +128,8 @@ public class Parcel {
         }
         for(i = 0; i < 6; i++)
         {
-            System.out.println(available[i]);
+            System.out.println(choice + ". " + available[i]);
+            choice++;
         }
 
     }

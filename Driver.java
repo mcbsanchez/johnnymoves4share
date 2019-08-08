@@ -9,7 +9,7 @@ public class Driver {
         ArrayList<Item> items = new ArrayList<>();
         items.add(new Document(4,4,1));
         items.add(new Product(4,4,1,1));
-        Parcel parcel = new Parcel("Martin","Metro Manila",items.size());
+        Parcel parcel = new Parcel("Earth","Metro Manila",items.size());
         parcel.addItem(items,size);
 
     }

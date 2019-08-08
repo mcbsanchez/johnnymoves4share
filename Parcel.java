@@ -186,21 +186,7 @@ public class Parcel {
         }
         return totalWeight > 3;
     }
-//    public double computeBaseFee()
-//    {
-//        int i;
-//        if (/*pType*/ == "FLAT")
-//        {
-//            if (/*dimension*/ == /*given dimension1*/)
-//                return 30;
-//            else
-//                return 50;
-//        }
-//        for (i = 0; i < items.size(); i++)
-//        {
-//            if ()
-//        }
-//    }
+
     public void setType(int n)
     {
         if(n < 2)
@@ -224,6 +210,41 @@ public class Parcel {
             System.out.println("Invalid");
         }
     }
+
+    public double getBaseFee()
+    {
+        int i;
+        double baseFee = 0;
+
+        if (type == PARCELTYPE[0]) // FLAT
+        {
+            if (size == SIZES[0])
+                return 30;
+            else
+                return 50;
+        }
+        else // BOX
+        {
+            for (i = 0; i < items.size(); i++)
+            {
+                if (items.get(i) instanceof Document || items.get(i) instanceof Product)
+                {
+                    baseFee += 40 * items.get(i).getWeight();
+                }
+                else
+                {
+                    if ((items.get(i).getLength() * items.get(i).getWidth() * items.get(i).getHeight() / 305) * 30 > 40 * items.get(i).getWeight())
+                        baseFee += 30 * (items.get(i).getLength() * items.get(i).getWidth() * items.get(i).getHeight() / 305);
+                    else
+                        baseFee += 40 * items.get(i).getWeight();
+
+                }
+            }
+
+            return baseFee;
+        }
+    }
+
     public String getType()
     {
         return type;

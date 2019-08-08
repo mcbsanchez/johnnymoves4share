@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class Parcel {
@@ -7,6 +8,7 @@ public class Parcel {
     private String recipient;
     private String destination;
     private int countItems;
+    private ArrayList <Item> items;
 
 
     public Parcel (String recipient, String destination, int countItems)
@@ -15,7 +17,13 @@ public class Parcel {
         this.destination = destination;
         this.countItems = countItems;
     }
-    public void addItem(ArrayList<Item> items, double[][]size)
+
+    public void addItem (ArrayList<Item> items)
+    {
+        this.items = items;
+    }
+
+    public double[][] showAvailableParcels(double[][]size)
     {
         /*
         i - number of spaces
@@ -25,6 +33,7 @@ public class Parcel {
          */
         int i, j, k, c = 0;
         boolean tempAvailable[] = {false, false, false, false, false, false};
+        this.items = items;
         if (items.size() == 1)
         {
             if (!isTooHeavy(items))
@@ -180,8 +189,19 @@ public class Parcel {
         }
         return totalWeight > 3;
     }
-//    public double computeBaseFee()
-//    {
-//
-//    }
+    public double computeBaseFee()
+    {
+        int i;
+        if (/*pType*/ == "FLAT")
+        {
+            if (/*dimension*/ == /*given dimension1*/)
+                return 30;
+            else
+                return 50;
+        }
+        for (i = 0; i < items.size(); i++)
+        {
+            if ()
+        }
+    }
 }

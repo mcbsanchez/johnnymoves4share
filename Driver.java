@@ -12,6 +12,14 @@ public class Driver {
         Parcel parcel = new Parcel("Martin","Metro Manila",items.size());
         parcel.addItem(items);
         parcel.showAvailableParcels(size);
+        parcel.setType(1);
+        parcel.setType(2);
+        parcel.setType(3);
+        parcel.setType(4);
+        parcel.setType(5);
+        parcel.setType(7);
+        parcel.setType(0);
+        System.out.println(parcel.getType());
 
 
     }

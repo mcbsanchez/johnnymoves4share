@@ -1,9 +1,16 @@
 public class TrackNum
 {
-	public TrackNum (String p, int date, String code, int m)
+	public TrackNum (String p, int month, int day, String code, int m)
 	{
 		parcelType = p;
-		MMDD = date;
+		if(month < 10)
+			this.month = "0"+Integer.toString(month);
+		else
+			this.month = Integer.toString(month);
+		if(day < 10)
+			this.day = "0"+Integer.toString(day);
+		else
+			this.day = Integer.toString(day);
 
 		if (code.equalsIgnoreCase("Metro Manila"))
 		{
@@ -23,16 +30,19 @@ public class TrackNum
 		}
 
 		max = m;
+
+
 	}
 	
 	public String toString()
 	{
-		return parcelType + MMDD + destinationCode + max + seq;
+		return parcelType + month + day + destinationCode + max + seq;
 	}
 	
 	
 	private String				parcelType;
-	private int					MMDD;
+	private String				month;
+	private String				day;
 	private String              destinationCode;
 	private int                 max;
 	private int					seq;

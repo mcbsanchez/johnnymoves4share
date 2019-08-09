@@ -233,10 +233,10 @@ public class Parcel {
             insured = false;
     }
 //
-//    public void setTracking ()
-//    {
-//        track = new TrackNum(type, /*date*/, destination, countItems, /*sequence in the day*/)
-//    }
+    public void setTracking ()
+    {
+        track = new TrackNum(type, month, day, destination, countItems, parcel)
+    }
     public String getType()
     {
         return type;
@@ -351,6 +351,19 @@ public class Parcel {
     {
         return recipient;
     }
+    public void setTime(Calendar cal) {
+        //Calendar cal = Calendar.getInstance();
+        month = cal.get(Calendar.MONTH)+1;
+        day = cal.get(Calendar.DAY_OF_MONTH);
+    }
+    public int getMonth()
+    {
+        return month;
+    }
+    public int getDay()
+    {
+        return day;
+    }
 
     private boolean[] available = {false,false,false,false,false,false};
     private double[][] SIZES = {{9, 14, 1}, {12, 18, 3}, {12, 10, 5}, {14, 11, 7}, {18, 12, 9}, {20, 16, 12}};
@@ -371,17 +384,6 @@ public class Parcel {
     private int month;
     private int day;
 
-    public void setTime(Calendar cal) {
-        //Calendar cal = Calendar.getInstance();
-        month = cal.get(Calendar.MONTH)+1;
-        day = cal.get(Calendar.DAY_OF_MONTH);
-    }
-    public int getMonth()
-    {
-        return month;
-    }
-    public int getDay()
-    {
-        return day;
-    }
+
+
 }

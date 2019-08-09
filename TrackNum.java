@@ -5,11 +5,11 @@ public class TrackNum
 		parcelType = p.getType();
 
 		if(p.getMonth() < 10)
-			this.month = "0"+Integer.toString(p.getMonth());
+			this.month = "0"+ p.getMonth();
 		else
 			this.month = Integer.toString(p.getMonth());
 		if(p.getDay() < 10)
-			this.day = "0"+Integer.toString(p.getDay());
+			this.day = "0"+ p.getDay();
 		else
 			this.day = Integer.toString(p.getDay());
 

@@ -378,18 +378,48 @@ public class Parcel {
         return recipient;
     }
     public void setTime(Calendar cal) {
-        //Calendar cal = Calendar.getInstance();
-        month = cal.get(Calendar.MONTH)+1;
-        day = cal.get(Calendar.DAY_OF_MONTH);
+        Calendar current = Calendar.getInstance();
+        daySent = current;
+        Calendar future = Calendar.getInstance();
+        if(getDestination().equalsIgnoreCase("Metro Manila"))
+            future.add(Calendar.DAY_OF_MONTH,1);
+        else if(getDestination().equalsIgnoreCase("Provincial Luzon"))
+            future.add(Calendar.DAY_OF_MONTH,2);
+        if(getDestination().equalsIgnoreCase("Visayas"))
+            future.add(Calendar.DAY_OF_MONTH,5);
+        else if(getDestination().equalsIgnoreCase("Mindanao"))
+            future.add(Calendar.DAY_OF_MONTH,8);
+        dayReceived = future;
     }
     public int getMonth()
     {
-        return month;
+        return daySent.get(Calendar.MONTH)+1;
     }
     public int getDay()
     {
-        return day;
+        return daySent.get(Calendar.DAY_OF_MONTH);
     }
+    public String viewStatusToday(Calendar cal)
+    {
+        System.out.println(daySent.get(Calendar.DAY_OF_YEAR));
+        System.out.println(dayReceived.get(Calendar.DAY_OF_YEAR));
+        System.out.println(cal.get(Calendar.DAY_OF_YEAR));
+        if(daySent.get(Calendar.DAY_OF_YEAR) == cal.get(Calendar.DAY_OF_YEAR))
+        {
+            status = CURRENTSTATUS[0];
+        }
+        else if(cal.get(Calendar.DAY_OF_YEAR) >=  dayReceived.get(Calendar.DAY_OF_YEAR))
+        {
+            status = CURRENTSTATUS[2];
+        }
+        else if(daySent.get(Calendar.DAY_OF_YEAR) != cal.get(Calendar.DAY_OF_YEAR) && dayReceived.get(Calendar.DAY_OF_YEAR) != cal.get(Calendar.DAY_OF_YEAR))
+        {
+            status = CURRENTSTATUS[1];
+        }
+        return status;
+
+    }
+
 
     private boolean[] available = {false,false,false,false,false,false};
     private double[][] SIZES = {{9, 14, 1}, {12, 18, 3}, {12, 10, 5}, {14, 11, 7}, {18, 12, 9}, {20, 16, 12}};
@@ -408,7 +438,7 @@ public class Parcel {
     private ArrayList <Item> items;
     private int sequenceNumber;
 
-    private int month;
-    private int day;
-
+    private Calendar daySent;
+    private Calendar dayReceived;
+    private String status;
 }

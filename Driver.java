@@ -32,21 +32,21 @@ public class Driver {
             System.out.println(p.get(count).getType());
             p.get(count).setInsurance("Yes");
             p.get(count).showBreakdown();
-            long end = System.nanoTime();
             p.get(count).setSequenceNumber(parcelNumber);
-            p.get(count).generateTrackingNum();
-
+            long end = System.nanoTime();
             long elapsedTime = end - start;
-            double elapsedTimeInSecond = (double) elapsedTime / 1_000_000_000;
             long convert = TimeUnit.SECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS);
-            p.get(count).setTime(cal);
             if (convert / 3 > 0) {
                 cal.add(Calendar.DAY_OF_YEAR, (int)convert/3);
                 System.out.println(convert);
                 start = System.nanoTime();
-                System.out.println("Next Day");
-                parcelNumber = 0;
             }
+
+
+            p.get(count).setTime(cal);
+            p.get(count).generateTrackingNum();
+
+            System.out.println(p.get(0).viewStatusToday(cal));
             System.out.println("Month-" + p.get(count).getMonth() + " Day-" + p.get(count).getDay());
             System.out.println(p.get(count).getTrackingNum());
             System.out.println("Do you want to proceed?");
@@ -55,6 +55,7 @@ public class Driver {
                 exit = true;
             }
             count++;
+
         }
 
     }

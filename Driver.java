@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Scanner;
@@ -31,7 +32,7 @@ public class Driver {
         boolean exit = false;
         ArrayList<Parcel> p = new ArrayList<>();
         int count = 0;
-        while(!exit){
+        while(!exit) {
             boolean option;
 
             ArrayList<Item> items = new ArrayList<>();
@@ -53,23 +54,20 @@ public class Driver {
             long convert = TimeUnit.SECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS);
             System.out.println(convert);
             p.get(count).setTime(cal);
-            if (convert/3 > 0)
-            {
+            if (convert / 3 > 0) {
                 start = System.nanoTime();
                 System.out.println("Next Day");
                 cal.add(Calendar.DAY_OF_YEAR, 1);
             }
-            System.out.println("Month-"+p.get(count).getMonth()+" Day-"+p.get(count).getDay());
+            System.out.println("Month-" + p.get(count).getMonth() + " Day-" + p.get(count).getDay());
 
             System.out.println("Do you want to proceed?");
             option = sc.nextBoolean();
-            if(!option)
-            {
+            if (!option) {
                 exit = true;
             }
             count++;
         }
-
 
     }
 }

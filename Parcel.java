@@ -222,6 +222,11 @@ public class Parcel {
             listBreakdown(insured);
     }
 
+    public void setTracking ()
+    {
+        track = new TrackNum(type, /*date*/, destination, countItems, /*sequence in the day*/)
+    }
+
     public double getBaseFee()
     {
         int i;
@@ -271,4 +276,5 @@ public class Parcel {
     private String destination;
     private int countItems;
     private ArrayList <Item> items;
+    private TrackNum track;
 }

@@ -1,35 +1,46 @@
 public class TrackNum
 {
-	public TrackNum (String p, int month, int day, String code, int m)
+	public TrackNum (Parcel p)
 	{
-		parcelType = p;
-		if(month < 10)
-			this.month = "0"+Integer.toString(month);
-		else
-			this.month = Integer.toString(month);
-		if(day < 10)
-			this.day = "0"+Integer.toString(day);
-		else
-			this.day = Integer.toString(day);
+		parcelType = p.getType();
 
-		if (code.equalsIgnoreCase("Metro Manila"))
+		if(p.getMonth() < 10)
+			this.month = "0"+Integer.toString(p.getMonth());
+		else
+			this.month = Integer.toString(p.getMonth());
+		if(p.getDay() < 10)
+			this.day = "0"+Integer.toString(p.getDay());
+		else
+			this.day = Integer.toString(p.getDay());
+
+		if (p.getDestination().equalsIgnoreCase("Metro Manila"))
 		{
 			destinationCode = "MML";
 		}
-		else if (code.equalsIgnoreCase("Luzon"))
+		else if (p.getDestination().equalsIgnoreCase("Luzon"))
 		{
 			destinationCode = "LUZ";
 		}
-		else if (code.equalsIgnoreCase("Visayas"))
+		else if (p.getDestination().equalsIgnoreCase("Visayas"))
 		{
 			destinationCode = "VIS";
 		}
-		else if (code.equalsIgnoreCase("Mindanao"))
+		else if (p.getDestination().equalsIgnoreCase("Mindanao"))
 		{
 			destinationCode = "MIN";
 		}
 
-		max = m;
+		max = p.getNumOfItems();
+
+		if(p. getSequenceNumber() < 10)
+		{
+			seq = "0"+"0"+p.getSequenceNumber();
+		}
+		else if(p.getSequenceNumber() < 100)
+		{
+			seq = "0"+p.getSequenceNumber();
+		}
+
 
 
 	}
@@ -45,5 +56,5 @@ public class TrackNum
 	private String				day;
 	private String              destinationCode;
 	private int                 max;
-	private int					seq;
+	private String				seq;
 }

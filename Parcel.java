@@ -232,22 +232,39 @@ public class Parcel {
         else
             insured = false;
     }
-//
-    public void setTracking ()
-    {
-        track = new TrackNum(type, month, day, destination, countItems, parcel)
+
+    public void generateTrackingNum() {
+        track = new TrackNum(this);
     }
+
+    public String getTrackingNum()
+    {
+        return track.toString();
+    }
+
     public String getType()
     {
         return type;
     }
-    public double[] getDimensions()
+
+//    public double[] getDimensions()
+//    {
+//        return size;
+//    }
+//
+//    public Item getItem(int i)
+//    {
+//        return items.get(i);
+//    }
+
+    public void setSequenceNumber(int n)
     {
-        return size;
+        sequenceNumber = n;
     }
-    public Item getItem(int i)
+
+    public int getSequenceNumber()
     {
-        return items.get(i);
+        return sequenceNumber;
     }
 
     public double getTotalWeight()
@@ -261,6 +278,15 @@ public class Parcel {
         return totalWeight;
     }
 
+    public String getDestination()
+    {
+        return destination;
+    }
+
+    public int getNumOfItems()
+    {
+        return countItems;
+    }
     public double getBaseFee()
     {
         int i;
@@ -374,16 +400,15 @@ public class Parcel {
     private String type;
     private double[] size;
     private boolean insured = false;
+    private int countItems;
     private TrackNum track;
 
     private String recipient;
     private String destination;
-    private int countItems;
     private ArrayList <Item> items;
+    private int sequenceNumber;
 
     private int month;
     private int day;
-
-
 
 }

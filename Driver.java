@@ -14,9 +14,11 @@ public class Driver {
         boolean exit = false;
         ArrayList<Parcel> p = new ArrayList<>();
         int count = 0;
+        int parcelNumber = 0;
 
         while(!exit) {
             boolean option;
+            parcelNumber++;
 
             ArrayList<Item> items = new ArrayList<>();
             items.add(new Document(4, 4, 1));
@@ -31,6 +33,8 @@ public class Driver {
             p.get(count).setInsurance("Yes");
             p.get(count).showBreakdown();
             long end = System.nanoTime();
+            p.get(count).setSequenceNumber(parcelNumber);
+            p.get(count).generateTrackingNum();
 
             long elapsedTime = end - start;
             double elapsedTimeInSecond = (double) elapsedTime / 1_000_000_000;
@@ -41,9 +45,10 @@ public class Driver {
                 System.out.println(convert);
                 start = System.nanoTime();
                 System.out.println("Next Day");
+                parcelNumber = 0;
             }
             System.out.println("Month-" + p.get(count).getMonth() + " Day-" + p.get(count).getDay());
-
+            System.out.println(p.get(count).getTrackingNum());
             System.out.println("Do you want to proceed?");
             option = sc.nextBoolean();
             if (!option) {

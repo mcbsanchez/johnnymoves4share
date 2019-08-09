@@ -211,6 +211,22 @@ public class Parcel {
         }
     }
 
+    public void setInsurance (String choice)
+    {
+        if (choice.equalsIgnoreCase("Yes"))
+        {
+            insured = true;
+            listBreakdown(insured);
+        }
+        else
+            listBreakdown(insured);
+    }
+
+    public void setTracking ()
+    {
+        track = new TrackNum(type, /*date*/, destination, countItems, /*sequence in the day*/)
+    }
+
     public double getBaseFee()
     {
         int i;
@@ -237,10 +253,8 @@ public class Parcel {
                         baseFee += 30 * (items.get(i).getLength() * items.get(i).getWidth() * items.get(i).getHeight() / 305);
                     else
                         baseFee += 40 * items.get(i).getWeight();
-
                 }
             }
-
             return baseFee;
         }
     }
@@ -293,10 +307,13 @@ public class Parcel {
     private static String[] DESTINATIONS = {"Metro Manila","Provincial Luzon", "Visayas", "Mindanao"};
     private static String[] CURRENTSTATUS = {"PREPARING","SHIPPING","DELIVERED"};
     private static String[] PARCELTYPE = {"FLT","BOX"};
+
     private String type;
     private double[] size;
+    private boolean insured = false;
     private String recipient;
     private String destination;
     private int countItems;
     private ArrayList <Item> items;
+    private TrackNum track;
 }

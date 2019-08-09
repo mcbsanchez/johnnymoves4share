@@ -15,7 +15,7 @@ public class Driver {
         ArrayList<Parcel> p = new ArrayList<>();
         int count = 0;
         int parcelNumber = 0;
-
+        int i;
         while(!exit) {
             boolean option;
             parcelNumber++;
@@ -40,6 +40,7 @@ public class Driver {
                 cal.add(Calendar.DAY_OF_YEAR, (int)convert/3);
                 System.out.println(convert);
                 start = System.nanoTime();
+                parcelNumber = 0;
             }
             p.get(count).setTime(cal);
             p.get(count).generateTrackingNum();
@@ -53,7 +54,17 @@ public class Driver {
                 exit = true;
             }
             count++;
-
+        }
+        exit = false;
+        String track;
+        while(!exit)
+        {
+            track = sc.next();
+            for(i = 0; i < p.size(); i++)
+            {
+                if (p.get(i).getTrackingNum().equalsIgnoreCase(track))
+                    System.out.println(p.get(i).viewStatusToday(cal));
+            }
         }
 
     }

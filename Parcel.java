@@ -248,15 +248,15 @@ public class Parcel {
         return type;
     }
 
-//    public double[] getDimensions()
-//    {
-//        return size;
-//    }
-//
-//    public Item getItem(int i)
-//    {
-//        return items.get(i);
-//    }
+    public double[] getDimensions()
+    {
+        return size;
+    }
+
+    public Item getItem(int i)
+    {
+        return items.get(i);
+    }
 
     public void setSequenceNumber(int n)
     {
@@ -378,6 +378,7 @@ public class Parcel {
     {
         return recipient;
     }
+
     public void setTime(Calendar cal) {
 
         daySent = (Calendar) cal.clone();
@@ -391,6 +392,7 @@ public class Parcel {
         else if(getDestination().equalsIgnoreCase("Mindanao"))
             dayReceived.add(Calendar.DAY_OF_MONTH,8);
     }
+
     public int getMonth()
     {
         return daySent.get(Calendar.MONTH)+1;

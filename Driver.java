@@ -6,24 +6,6 @@ import java.util.concurrent.TimeUnit;
 
 public class Driver {
 
-    Calendar cal = Calendar.getInstance();
-//    public void simulateTime()
-//    {
-//        Thread clock = new Thread() {
-//            public void run()
-//            {
-//                for(;;){
-//                    cal.add(Calendar.HOUR, 1);
-//                    try{
-//                        sleep(1000);
-//                    }catch (InterruptedException ex)
-//                    {
-//                    }
-//                }
-//            }
-//        };
-//        clock.start();
-//    }
     public static void main(String[] args)
     {
         long start = System.nanoTime();
@@ -32,6 +14,7 @@ public class Driver {
         boolean exit = false;
         ArrayList<Parcel> p = new ArrayList<>();
         int count = 0;
+
         while(!exit) {
             boolean option;
 
@@ -55,9 +38,9 @@ public class Driver {
             System.out.println(convert);
             p.get(count).setTime(cal);
             if (convert / 3 > 0) {
+                cal.add(Calendar.DAY_OF_YEAR, (int)convert/3);
                 start = System.nanoTime();
                 System.out.println("Next Day");
-                cal.add(Calendar.DAY_OF_YEAR, 1);
             }
             System.out.println("Month-" + p.get(count).getMonth() + " Day-" + p.get(count).getDay());
 

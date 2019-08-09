@@ -250,8 +250,47 @@ public class Parcel {
         return type;
     }
 
+    public double getServiceFee()
+    {
+        int i;
+        double totalWeight = 0, volume = size[0]*size[1]*size[2];
+        for(i = 0; i < items.size(); i++)
+        {
+            totalWeight += items.get(i).getWeight();
+        }
+
+        double fee;
+
+        if(destination.equalsIgnoreCase(DESTINATIONS[0]))
+            fee = 50;
+        else if(destination.equalsIgnoreCase(DESTINATIONS[1]))
+            fee = 100;
+        else if(destination.equalsIgnoreCase(DESTINATIONS[2]))
+        {
+            if(totalWeight*.10 > volume && totalWeight*.10 > 1000 )
+                fee = totalWeight*.10;
+            if(volume > totalWeight*.10 && volume > 1000 )
+                fee = volume;
+            if(1000 > volume &&  1000 > totalWeight*.10 )
+                fee = 1000;
+        }
+        else if(destination.equalsIgnoreCase(DESTINATIONS[3])
+        {
+            if(totalWeight*.25 > volume && totalWeight*.25 > 3000 )
+                fee = totalWeight*.10;
+            if(volume > totalWeight*.25 && volume > 3000 )
+                fee = volume;
+            if(3000 > volume &&  3000 > totalWeight*.25)
+                fee = 3000;
+        }
+
+        return fee;
+
+    }
+
     private boolean[] available = {false,false,false,false,false,false};
     private double[][] SIZES = {{9, 14, 1}, {12, 18, 3}, {12, 10, 5}, {14, 11, 7}, {18, 12, 9}, {20, 16, 12}};
+    private static String[] DESTINATIONS = {"Metro Manila","Provincial Luzon", "Visayas", "Mindanao"};
     private static String[] CURRENTSTATUS = {"PREPARING","SHIPPING","DELIVERED"};
     private static String[] PARCELTYPE = {"FLT","BOX"};
     private String type;

@@ -1,4 +1,4 @@
-public abstract class Product extends Item
+public class Product extends Item
 {
     public Product (double length, double width, double height, double weight)
     {
@@ -16,7 +16,6 @@ public abstract class Product extends Item
     {
         return weight;
     }
-    public abstract double getVWeight();
     private double height;
     private double weight;
 

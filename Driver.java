@@ -22,7 +22,8 @@ public class Driver {
         parcel.setType(7);
         parcel.setType(0);
         System.out.println(parcel.getType());
-
+        parcel.setInsurance("Yes");
+        parcel.showBreakdown();
         cal.add(Calendar.DAY_OF_YEAR, 1);
 
 

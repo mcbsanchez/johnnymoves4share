@@ -216,16 +216,15 @@ public class Parcel {
         if (choice.equalsIgnoreCase("Yes"))
         {
             insured = true;
-            listBreakdown(insured);
         }
         else
-            listBreakdown(insured);
+            insured = false;
     }
-
-    public void setTracking ()
-    {
-        track = new TrackNum(type, /*date*/, destination, countItems, /*sequence in the day*/)
-    }
+//
+//    public void setTracking ()
+//    {
+//        track = new TrackNum(type, /*date*/, destination, countItems, /*sequence in the day*/)
+//    }
 
     public double getBaseFee()
     {
@@ -267,14 +266,11 @@ public class Parcel {
     public double getServiceFee()
     {
         int i;
-        double totalWeight = 0, volume = size[0]*size[1]*size[2];
+        double fee = 0, totalWeight = 0, volume = size[0]*size[1]*size[2];
         for(i = 0; i < items.size(); i++)
         {
             totalWeight += items.get(i).getWeight();
         }
-
-        double fee;
-
         if(destination.equalsIgnoreCase(DESTINATIONS[0]))
             fee = 50;
         else if(destination.equalsIgnoreCase(DESTINATIONS[1]))
@@ -288,7 +284,7 @@ public class Parcel {
             if(1000 > volume &&  1000 > totalWeight*.10 )
                 fee = 1000;
         }
-        else if(destination.equalsIgnoreCase(DESTINATIONS[3])
+        else if(destination.equalsIgnoreCase(DESTINATIONS[3]))
         {
             if(totalWeight*.25 > volume && totalWeight*.25 > 3000 )
                 fee = totalWeight*.10;
@@ -300,6 +296,28 @@ public class Parcel {
 
         return fee;
 
+    }
+
+    public double getInsuranceFee()
+    {
+        if(insured)
+            return items.size()*5;
+        else
+            return 0;
+    }
+
+    public double getTotalFee()
+    {
+        return getBaseFee() + getInsuranceFee() + getServiceFee();
+    }
+
+    public void showBreakdown()
+    {
+        System.out.printf("     Base Fee \t %.2f \n", getBaseFee());
+        System.out.printf("  Service Fee \t %.2f \n", getServiceFee());
+        System.out.printf("Insurance Fee \t %.2f \n", getInsuranceFee());
+        System.out.println("--------------\t----------------------");
+        System.out.printf("    Total Fee \t %.2f \n", getTotalFee());
     }
 
     private boolean[] available = {false,false,false,false,false,false};

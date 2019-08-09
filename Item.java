@@ -5,7 +5,6 @@ public abstract class Item
         this.length = length;
         this.width = width;
     }
-
     public double getLength()
     {
         return length;

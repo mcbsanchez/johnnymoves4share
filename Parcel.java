@@ -12,7 +12,13 @@ public class Parcel {
 
     public void addItem (ArrayList<Item> items)
     {
-        this.items = items;
+//        System.out.println(items.get(0).getWeight());
+//        System.out.println(items.get(1).getWeight());
+//        System.out.println(items.get(2).getWeight());
+        this.items = new ArrayList<>(items);
+//        System.out.println(this.items.get(0).getWeight());
+//        System.out.println(this.items.get(1).getWeight());
+//        System.out.println(this.items.get(2).getWeight());
     }
 
     public void showAvailableParcels()
@@ -25,10 +31,9 @@ public class Parcel {
          */
         int i, j, k, c = 0;
         boolean tempAvailable[] = {false, false, false, false, false, false};
-        this.items = items;
         if (items.size() == 1)
         {
-            if (!isTooHeavy(items))
+            if (!isTooHeavy())
             {
                 for (i = 0; i < 2; i++)
                     for (j = 0; j < 6; j++)
@@ -58,7 +63,7 @@ public class Parcel {
         }
         else
         {
-            if (!isTooHeavy(items))
+            if (!isTooHeavy())
             {
                 for (i = 0; i < 2; i++)
                 {
@@ -75,8 +80,10 @@ public class Parcel {
                     }
                     for (j = 0; j < 6; j++) {
                         if (tempAvailable[j])
-                            available[i] = isFit(createNewSpace(SIZES, i, items.get(0).rotate(j)), items);
-                        tempAvailable[j] = false;
+                        {
+                            available[i] = isFit(createNewSpace(SIZES[i], items.get(0).rotate(j)), items);
+                            tempAvailable[j] = false;
+                        }
                     }
                 }
             }
@@ -97,7 +104,7 @@ public class Parcel {
                 {
                     if (tempAvailable[j])
                     {
-                        available[i] = isFit(createNewSpace(SIZES, i, items.get(0).rotate(j)), items);
+                        available[i] = isFit(createNewSpace(SIZES[i], items.get(0).rotate(j)), items);
                         tempAvailable[j] = false;
                     }
                 }
@@ -115,45 +122,25 @@ public class Parcel {
         }
 
     }
-    private double[][]createNewSpace(double[][] size,int i, double[] item)
+    private double[][]createNewSpace(double[] size, double[] item)
     {
-        return new double[][]{  {size[i][0] - item[0], size[i][1], size[i][2]},
-                                {size[i][0], size[i][1] - item[1], size[i][2]},
-                                {size[i][0], size[i][1], size[i][2] - item[2]}};
+        return new double[][]{  {size[0] - item[0], size[1], size[2]},
+                                {size[0], size[1] - item[1], size[2]},
+                                {size[0], size[1], size[2] - item[2]}};
     }
     private boolean isFit(double[][] size, ArrayList<Item> items)
     {
+        ArrayList<Item> tempItems = new ArrayList<>(items);
         int i, j, k, c = 0;
         double[][] newSize;
         boolean condition = false;
         boolean[] test = {false,false,false,false,false,false};
         if(items.size() == 1)
         {
-            for (i = 0; i < 3; i++) {
-                for (j = 0; j < 6; j++) {
-
-                    for (k = 0; k < 3; k++) {
-                        if (size[i][k] >= items.get(0).rotate(j)[k])
-                            c++;
-                        if (c == 3) {
-                            test[j] = true;
-                        }
-                    }
-                    c = 0;
-                }
-                for (j = 0; j < 6; j++) {
-                    if (test[j]) {
-                        condition = true;
-                        test[j] = false;
-                    }
-                }
-            }
-        }
-        else
-        {
-            items.remove(0);
-            for(i = 0; i < 3; i++) {
-                for (j = 0; j < 6; j++) {
+            for (i = 0; i < 3; i++)
+            {
+                for (j = 0; j < 6; j++)
+                {
 
                     for (k = 0; k < 3; k++)
                     {
@@ -165,9 +152,39 @@ public class Parcel {
                     }
                     c = 0;
                 }
-                for (j = 0; j < 6; j++) {
-                    if (test[j]) {
-                        condition = isFit(createNewSpace(size, i, items.get(0).rotate(j)), items);
+                for (j = 0; j < 6; j++)
+                {
+                    if (test[j])
+                    {
+                        condition = true;
+                        test[j] = false;
+                    }
+                }
+            }
+        }
+        else
+        {
+            tempItems.remove(0);
+            for(i = 0; i < 3; i++)
+            {
+                for (j = 0; j < 6; j++)
+                {
+
+                    for (k = 0; k < 3; k++)
+                    {
+                        if (size[i][k] >= tempItems.get(0).rotate(j)[k])
+                            c++;
+                        if (c == 3) {
+                            test[j] = true;
+                        }
+                    }
+                    c = 0;
+                }
+                for (j = 0; j < 6; j++)
+                {
+                    if (test[j])
+                    {
+                        condition = isFit(createNewSpace(size[i], tempItems.get(0).rotate(j)), tempItems);
                         test[j] = false;
                     }
                 }
@@ -176,15 +193,9 @@ public class Parcel {
         return condition;
     }
 
-    private boolean isTooHeavy(ArrayList<Item> items)
+    private boolean isTooHeavy()
     {
-        int i;
-        double totalWeight = 0;
-        for(i = 0; i < items.size(); i++)
-        {
-            totalWeight += items.get(i).getWeight();
-        }
-        return totalWeight > 3;
+        return getTotalWeight() > 3;
     }
 
     public void setType(int n)
@@ -211,7 +222,7 @@ public class Parcel {
         }
     }
 
-    public void setInsurance (String choice)
+    public void setInsurance(String choice)
     {
         if (choice.equalsIgnoreCase("Yes"))
         {
@@ -228,6 +239,25 @@ public class Parcel {
     public String getType()
     {
         return type;
+    }
+    public double[] getDimensions()
+    {
+        return size;
+    }
+    public Item getItem(int i)
+    {
+        return items.get(i);
+    }
+
+    public double getTotalWeight()
+    {
+        int i;
+        double totalWeight = 0;
+        for(i = 0; i < items.size(); i++)
+        {
+            totalWeight += items.get(i).getWeight();
+        }
+        return totalWeight;
     }
 
     public double getBaseFee()
@@ -248,7 +278,7 @@ public class Parcel {
             {
                 if (items.get(i) instanceof Document || items.get(i) instanceof Product)
                 {
-                    baseFee += 40 * items.get(i).getWeight();
+                    baseFee += 40 * Math.ceil(items.get(i).getWeight());
                 }
                 else
                 {
@@ -265,31 +295,28 @@ public class Parcel {
     public double getServiceFee()
     {
         int i;
-        double fee = 0, totalWeight = 0, volume = size[0]*size[1]*size[2];
-        for(i = 0; i < items.size(); i++)
-        {
-            totalWeight += items.get(i).getWeight();
-        }
+        double fee = 0, volume = size[0]*size[1]*size[2];
+
         if(destination.equalsIgnoreCase(DESTINATIONS[0]))
             fee = 50;
         else if(destination.equalsIgnoreCase(DESTINATIONS[1]))
             fee = 100;
         else if(destination.equalsIgnoreCase(DESTINATIONS[2]))
         {
-            if(totalWeight*.10 > volume && totalWeight*.10 > 1000 )
-                fee = totalWeight*.10;
-            if(volume > totalWeight*.10 && volume > 1000 )
+            if(getTotalWeight()*.10 > volume && getTotalWeight() > 1000 )
+                fee = getTotalWeight()*.10;
+            else if(volume > getTotalWeight()*.10 && volume > 1000 )
                 fee = volume;
-            if(1000 > volume &&  1000 > totalWeight*.10 )
+            else if(1000 > volume &&  1000 > getTotalWeight()*.10 )
                 fee = 1000;
         }
         else if(destination.equalsIgnoreCase(DESTINATIONS[3]))
         {
-            if(totalWeight*.25 > volume && totalWeight*.25 > 3000 )
-                fee = totalWeight*.10;
-            if(volume > totalWeight*.25 && volume > 3000 )
+            if(getTotalWeight()*.25 > volume && getTotalWeight()*.25 > 3000 )
+                fee = getTotalWeight()*.10;
+            else if(volume > getTotalWeight()*.25 && volume > 3000 )
                 fee = volume;
-            if(3000 > volume &&  3000 > totalWeight*.25)
+            else if(3000 > volume &&  3000 > getTotalWeight()*.25)
                 fee = 3000;
         }
 

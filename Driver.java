@@ -35,10 +35,10 @@ public class Driver {
             long elapsedTime = end - start;
             double elapsedTimeInSecond = (double) elapsedTime / 1_000_000_000;
             long convert = TimeUnit.SECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS);
-            System.out.println(convert);
             p.get(count).setTime(cal);
             if (convert / 3 > 0) {
                 cal.add(Calendar.DAY_OF_YEAR, (int)convert/3);
+                System.out.println(convert);
                 start = System.nanoTime();
                 System.out.println("Next Day");
             }

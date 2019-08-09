@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Parcel {
 
@@ -366,4 +367,21 @@ public class Parcel {
     private String destination;
     private int countItems;
     private ArrayList <Item> items;
+
+    private int month;
+    private int day;
+
+    public void setTime(Calendar cal) {
+        //Calendar cal = Calendar.getInstance();
+        month = cal.get(Calendar.MONTH)+1;
+        day = cal.get(Calendar.DAY_OF_MONTH);
+    }
+    public int getMonth()
+    {
+        return month;
+    }
+    public int getDay()
+    {
+        return day;
+    }
 }

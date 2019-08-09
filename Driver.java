@@ -41,8 +41,6 @@ public class Driver {
                 System.out.println(convert);
                 start = System.nanoTime();
             }
-
-
             p.get(count).setTime(cal);
             p.get(count).generateTrackingNum();
 

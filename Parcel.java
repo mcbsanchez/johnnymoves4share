@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Set;
 
 public class Parcel {
 
@@ -378,18 +379,17 @@ public class Parcel {
         return recipient;
     }
     public void setTime(Calendar cal) {
-        Calendar current = Calendar.getInstance();
-        daySent = current;
-        Calendar future = Calendar.getInstance();
+
+        daySent = (Calendar) cal.clone();
+        dayReceived = (Calendar) cal.clone();
         if(getDestination().equalsIgnoreCase("Metro Manila"))
-            future.add(Calendar.DAY_OF_MONTH,1);
+            dayReceived.add(Calendar.DAY_OF_MONTH,1);
         else if(getDestination().equalsIgnoreCase("Provincial Luzon"))
-            future.add(Calendar.DAY_OF_MONTH,2);
+            dayReceived.add(Calendar.DAY_OF_MONTH,2);
         if(getDestination().equalsIgnoreCase("Visayas"))
-            future.add(Calendar.DAY_OF_MONTH,5);
+            dayReceived.add(Calendar.DAY_OF_MONTH,5);
         else if(getDestination().equalsIgnoreCase("Mindanao"))
-            future.add(Calendar.DAY_OF_MONTH,8);
-        dayReceived = future;
+            dayReceived.add(Calendar.DAY_OF_MONTH,8);
     }
     public int getMonth()
     {
@@ -401,20 +401,34 @@ public class Parcel {
     }
     public String viewStatusToday(Calendar cal)
     {
-        System.out.println(daySent.get(Calendar.DAY_OF_YEAR));
-        System.out.println(dayReceived.get(Calendar.DAY_OF_YEAR));
-        System.out.println(cal.get(Calendar.DAY_OF_YEAR));
-        if(daySent.get(Calendar.DAY_OF_YEAR) == cal.get(Calendar.DAY_OF_YEAR))
-        {
+//        System.out.println(daySent.get(Calendar.DAY_OF_YEAR));
+//        System.out.println(dayReceived.get(Calendar.DAY_OF_YEAR));
+//        System.out.println(cal.get(Calendar.DAY_OF_YEAR));
+        if (daySent.get(Calendar.DAY_OF_YEAR) == cal.get(Calendar.DAY_OF_YEAR)) {
             status = CURRENTSTATUS[0];
         }
-        else if(cal.get(Calendar.DAY_OF_YEAR) >=  dayReceived.get(Calendar.DAY_OF_YEAR))
-        {
-            status = CURRENTSTATUS[2];
+        else if (dayReceived.get(Calendar.YEAR) == daySent.get(Calendar.YEAR)) {
+            if (cal.get(Calendar.DAY_OF_YEAR) >= dayReceived.get(Calendar.DAY_OF_YEAR)) {
+                status = CURRENTSTATUS[2];
+            } else if (daySent.get(Calendar.DAY_OF_YEAR) != cal.get(Calendar.DAY_OF_YEAR) && dayReceived.get(Calendar.DAY_OF_YEAR) != cal.get(Calendar.DAY_OF_YEAR)) {
+                status = CURRENTSTATUS[1];
+            }
         }
-        else if(daySent.get(Calendar.DAY_OF_YEAR) != cal.get(Calendar.DAY_OF_YEAR) && dayReceived.get(Calendar.DAY_OF_YEAR) != cal.get(Calendar.DAY_OF_YEAR))
+        else if(dayReceived.get(Calendar.YEAR) > cal.get(Calendar.YEAR) && cal.get(Calendar.YEAR) == daySent.get(Calendar.YEAR))
         {
-            status = CURRENTSTATUS[1];
+            if (cal.get(Calendar.DAY_OF_YEAR) >= dayReceived.get(Calendar.DAY_OF_YEAR) + cal.getMaximum(Calendar.DAY_OF_YEAR)) {
+                status = CURRENTSTATUS[2];
+            } else if (daySent.get(Calendar.DAY_OF_YEAR) != cal.get(Calendar.DAY_OF_YEAR) && dayReceived.get(Calendar.DAY_OF_YEAR) != cal.get(Calendar.DAY_OF_YEAR)) {
+                status = CURRENTSTATUS[1];
+            }
+        }
+        else if(dayReceived.get(Calendar.YEAR) > cal.get(Calendar.YEAR) && cal.get(Calendar.YEAR) > daySent.get(Calendar.YEAR))
+        {
+            if (cal.get(Calendar.DAY_OF_YEAR) >= dayReceived.get(Calendar.DAY_OF_YEAR) + cal.getMaximum(Calendar.DAY_OF_YEAR)) {
+                status = CURRENTSTATUS[2];
+            } else if (daySent.get(Calendar.DAY_OF_YEAR) != cal.get(Calendar.DAY_OF_YEAR) && dayReceived.get(Calendar.DAY_OF_YEAR) != cal.get(Calendar.DAY_OF_YEAR)) {
+                status = CURRENTSTATUS[1];
+            }
         }
         return status;
 

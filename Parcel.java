@@ -15,7 +15,7 @@ public class Parcel {
         this.items = items;
     }
 
-    public void showAvailableParcels(double[][]size)
+    public void showAvailableParcels()
     {
         /*
         i - number of spaces
@@ -35,7 +35,7 @@ public class Parcel {
                     {
                         for (k = 0; k < 3; k++)
                         {
-                            if (size[i][k] >= items.get(0).rotate(j)[k])
+                            if (SIZES[i][k] >= items.get(0).rotate(j)[k])
                                 c++;
                             if (c == 3)
                                 available[i] = true;
@@ -48,7 +48,7 @@ public class Parcel {
                 {
                     for (k = 0; k < 3; k++)
                     {
-                        if (size[i][k] >= items.get(0).rotate(j)[k])
+                        if (SIZES[i][k] >= items.get(0).rotate(j)[k])
                             c++;
                         if (c == 3)
                             available[i] = true;
@@ -66,7 +66,7 @@ public class Parcel {
                     {
                         for (k = 0; k < 3; k++)
                         {
-                            if (size[i][k] >= items.get(0).rotate(j)[k])
+                            if (SIZES[i][k] >= items.get(0).rotate(j)[k])
                                 c++;
                             if (c == 3)
                                 tempAvailable[j] = true;
@@ -75,7 +75,7 @@ public class Parcel {
                     }
                     for (j = 0; j < 6; j++) {
                         if (tempAvailable[j])
-                            available[i] = isFit(createNewSpace(size, i, items.get(0).rotate(j)), items);
+                            available[i] = isFit(createNewSpace(SIZES, i, items.get(0).rotate(j)), items);
                         tempAvailable[j] = false;
                     }
                 }
@@ -86,7 +86,7 @@ public class Parcel {
                 {
                     for (k = 0; k < 3; k++)
                     {
-                        if (size[i][k] >= items.get(0).rotate(j)[k])
+                        if (SIZES[i][k] >= items.get(0).rotate(j)[k])
                             c++;
                         if (c == 3)
                             tempAvailable[j] = true;
@@ -97,7 +97,7 @@ public class Parcel {
                 {
                     if (tempAvailable[j])
                     {
-                        available[i] = isFit(createNewSpace(size, i, items.get(0).rotate(j)), items);
+                        available[i] = isFit(createNewSpace(SIZES, i, items.get(0).rotate(j)), items);
                         tempAvailable[j] = false;
                     }
                 }
@@ -225,6 +225,10 @@ public class Parcel {
 //    {
 //        track = new TrackNum(type, /*date*/, destination, countItems, /*sequence in the day*/)
 //    }
+    public String getType()
+    {
+        return type;
+    }
 
     public double getBaseFee()
     {
@@ -256,11 +260,6 @@ public class Parcel {
             }
             return baseFee;
         }
-    }
-
-    public String getType()
-    {
-        return type;
     }
 
     public double getServiceFee()
@@ -320,6 +319,11 @@ public class Parcel {
         System.out.printf("    Total Fee \t %.2f \n", getTotalFee());
     }
 
+    public String getRecipient()
+    {
+        return recipient;
+    }
+
     private boolean[] available = {false,false,false,false,false,false};
     private double[][] SIZES = {{9, 14, 1}, {12, 18, 3}, {12, 10, 5}, {14, 11, 7}, {18, 12, 9}, {20, 16, 12}};
     private static String[] DESTINATIONS = {"Metro Manila","Provincial Luzon", "Visayas", "Mindanao"};
@@ -329,9 +333,10 @@ public class Parcel {
     private String type;
     private double[] size;
     private boolean insured = false;
+    private TrackNum track;
+
     private String recipient;
     private String destination;
     private int countItems;
     private ArrayList <Item> items;
-    private TrackNum track;
 }

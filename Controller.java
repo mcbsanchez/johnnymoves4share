@@ -13,6 +13,7 @@ public class Controller implements ActionListener, ItemListener
 
 	ArrayList<Parcel> p = new ArrayList<>();
 	ArrayList<Item> i = new ArrayList<>();
+	String password = "animo!";
 	int a = 0;
 
 	// ActionListener
@@ -97,6 +98,8 @@ public class Controller implements ActionListener, ItemListener
 		}
 		else if (e.getActionCommand ().equals ("Exit Program"))
 		{
+			if(gui.pfPassword.getPassword().toString().equalsIgnoreCase(password)) {
+			}
 			gui.updateContentPane(gui.HOME);
 		}
 

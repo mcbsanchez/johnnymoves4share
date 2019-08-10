@@ -38,8 +38,8 @@ public class Controller implements ActionListener
 		{
 			if (!gui.getDestination().equals("--- choose ---") && gui.getNum() > 0)
 			{
-
 				parcels.add(new Parcel (gui.getName(),gui.getDestination(),gui.getNum()));
+				gui.updateContentPane (gui.CREATE);
 			}
 			else
 				gui.updateContentPane (gui.SETUP);
@@ -68,11 +68,14 @@ public class Controller implements ActionListener
 
 				}
 				items.add(temp);
+				gui.radiobtns.clearSelection();
+				gui.updateDperType (gui.BLANK);
 				gui.resetAll();
 			}
-			parcels.get(i).setItems(items);
+			parcels.get(0).setItems(items);
 			gui.updateContentPane(gui.CHECKOUT);
 
+			/*
 			if (gui.rdbtnDocument.isSelected())
 			{
 				gui.radiobtns.clearSelection();
@@ -90,7 +93,7 @@ public class Controller implements ActionListener
 				gui.clearDIrregular();
 			}
 			gui.radiobtns.clearSelection();
-			gui.updateDperType (gui.BLANK);
+			gui.updateDperType (gui.BLANK);*/
 		}
 		else if (e.getActionCommand().equals ("Back to Menu"))
 		{

@@ -39,6 +39,7 @@ public class Controller implements ActionListener
 			if (!gui.getDestination().equals("--- choose ---") && gui.getNum() > 0)
 			{
 				parcels.add(new Parcel (gui.getName(),gui.getDestination(),gui.getNum()));
+				gui.resetAll();
 				gui.updateContentPane (gui.CREATE);
 			}
 			else
@@ -60,7 +61,6 @@ public class Controller implements ActionListener
 		{
 			for (i = 0; i < parcels.get(0).getNumOfItems(); i++)
 			{
-				gui.updateContentPane(gui.CREATE);
 				try
 				{
 					temp = gui.createItem();
@@ -68,29 +68,15 @@ public class Controller implements ActionListener
 
 				}
 				items.add(temp);
+				gui.radiobtns.clearSelection();
+				gui.updateContentPane(gui.CREATE);
 				gui.resetAll();
+
+
 			}
 			parcels.get(0).setItems(items);
 			gui.updateContentPane(gui.CHECKOUT);
 
-			if (gui.rdbtnDocument.isSelected())
-			{
-				gui.radiobtns.clearSelection();
-				gui.clearDDocument();
-			}
-			else if (gui.rdbtnProduct.isSelected())
-			{
-				gui.radiobtns.clearSelection();
-				gui.clearDProduct();
-
-			}
-			else if (gui.rdbtnIrregular.isSelected())
-			{
-				gui.radiobtns.clearSelection();
-				gui.clearDIrregular();
-			}
-			gui.radiobtns.clearSelection();
-			gui.updateDperType (gui.BLANK);
 		}
 		else if (e.getActionCommand().equals ("Back to Menu"))
 		{
@@ -106,7 +92,7 @@ public class Controller implements ActionListener
 		}
 		else if (e.getActionCommand ().equals ("Track"))
 		{
-			gui.tfTracker.setText(" ");
+			gui.setTracker(" ");
 		}
 		else if (e.getActionCommand ().equals ("Exit Program"))
 		{

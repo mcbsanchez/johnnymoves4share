@@ -84,7 +84,7 @@ public class Gui extends JFrame
 
 
 	private JTextField tfName;
-	public JTextField tfCount;
+	private JTextField tfCount;
 	private JTextField tfDLength;
 	private JTextField tfDWidth;
 	private JTextField tfDPages;
@@ -96,10 +96,10 @@ public class Gui extends JFrame
 	private JTextField tfIWidth;
 	private JTextField tfIHeight;
 	private JTextField tfIWeight;
-	public JTextField tfTracker;
+	private JTextField tfTracker;
 
-	public JTextArea taReport;
-	public JTextArea taTracked;
+	private JTextArea taReport;
+	private JTextArea taTracked;
 
 	public JPasswordField pfPassword;
 
@@ -714,6 +714,10 @@ public class Gui extends JFrame
 
 	public void resetAll ()
 	{
+			tfName.setText(" ");
+			cbDestination.setSelectedIndex(0);
+			tfCount.setText(" ");
+
 			tfDLength.setText(" ");
 			tfDWidth.setText(" ");
 			tfDPages.setText(" ");
@@ -727,5 +731,10 @@ public class Gui extends JFrame
 			tfIWidth.setText(" ");
 			tfIHeight.setText(" ");
 			tfIWeight.setText(" ");
+	}
+
+	public void setTracker (String s)
+	{
+		tfTracker.setText(s);
 	}
 }

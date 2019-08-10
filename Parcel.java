@@ -533,6 +533,14 @@ public class Parcel {
 
     }
 
+    /**Gets the available parcels
+     * @return boolean[] all the parcel sizes that fit the items
+     */
+    public boolean[]getAvailableParcels()
+    {
+        return available;
+    }
+
     //Attributes
     private static String[] DESTINATIONS = {"Metro Manila","Provincial Luzon", "Visayas", "Mindanao"};
     private double[][] SIZES = {{9, 14, 1}, {12, 18, 3}, {12, 10, 5}, {14, 11, 7}, {18, 12, 9}, {20, 16, 12}};

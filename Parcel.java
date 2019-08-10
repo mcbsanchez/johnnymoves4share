@@ -115,9 +115,9 @@ public class Parcel {
         {
             if(available[i])
                 if(i < 2)
-                        System.out.println("FLAT PARCEL( "+SIZES[i][0]+" x "+SIZES[i][1]+" x "+SIZES[i][2]+" )");
+                    System.out.println("FLAT PARCEL( "+SIZES[i][0]+" x "+SIZES[i][1]+" x "+SIZES[i][2]+" )");
                 else
-                        System.out.println("BOX PARCEL( "+SIZES[i][0]+" x "+SIZES[i][1]+" x "+SIZES[i][2]+" )");
+                    System.out.println("BOX PARCEL( "+SIZES[i][0]+" x "+SIZES[i][1]+" x "+SIZES[i][2]+" )");
         }
 
     }
@@ -129,8 +129,8 @@ public class Parcel {
     private double[][]createNewSpace(double[] size, double[] item)
     {
         return new double[][]{  {size[0] - item[0], size[1], size[2]},
-                                {size[0], size[1] - item[1], size[2]},
-                                {size[0], size[1], size[2] - item[2]}};
+                {size[0], size[1] - item[1], size[2]},
+                {size[0], size[1], size[2] - item[2]}};
     }
 
     /**Method that is being recursively called until all items fit the box
@@ -228,7 +228,7 @@ public class Parcel {
     /** Sets the items for the parcel
      * @param items - ArrayList of Item that can range from 1 to * number of items
      */
-    private void setItems (ArrayList<Item> items)
+    public void setItems (ArrayList<Item> items)
     {
 
         this.items = new ArrayList<>(items);
@@ -242,7 +242,7 @@ public class Parcel {
     /**Sets the type of parcel and its dimensions
      * @param n - number of items initialized at the start
      */
-    private void setType(int n)
+    public void setType(int n)
     {
         if(n < 2)
         {

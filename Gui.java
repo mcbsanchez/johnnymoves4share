@@ -83,19 +83,19 @@ public class Gui extends JFrame
 	public JRadioButton rdbtnDocument;
 
 
-	public JTextField tfName;
+	private JTextField tfName;
 	public JTextField tfCount;
-	public JTextField tfDLength;
-	public JTextField tfDWidth;
-	public JTextField tfDPages;
-	public JTextField tfPLength;
-	public JTextField tfPWidth;
-	public JTextField tfPHeight;
-	public JTextField tfPWeight;
-	public JTextField tfILength;
-	public JTextField tfIWidth;
-	public JTextField tfIHeight;
-	public JTextField tfIWeight;
+	private JTextField tfDLength;
+	private JTextField tfDWidth;
+	private JTextField tfDPages;
+	private JTextField tfPLength;
+	private JTextField tfPWidth;
+	private JTextField tfPHeight;
+	private JTextField tfPWeight;
+	private JTextField tfILength;
+	private JTextField tfIWidth;
+	private JTextField tfIHeight;
+	private JTextField tfIWeight;
 	public JTextField tfTracker;
 
 	public JTextArea taReport;
@@ -625,7 +625,7 @@ public class Gui extends JFrame
 	// PARCEL INITIALIZATION
 	public String getName()
 	{
-		return tfName.getText().;
+		return tfName.getText();
 	}
 
 	public String getDestination()
@@ -655,25 +655,26 @@ public class Gui extends JFrame
 		return Integer.parseInt(tfCount.getText());
 	}
 
-	public Item createItem ()
+	public Item createItem () throws Exception
 	{
 		Item item;
 
 		int pages;
 		double length, width, height, weight;
-
-			if (rdbtnDocument.getSelectedObjects().toString().equals("Document"))
-			{
+		try
+		{
+			if (rdbtnDocument.getSelectedObjects().toString().equals("Document")) {
 				length = Double.parseDouble(tfDLength.getText());
 				width = Double.parseDouble(tfDWidth.getText());
 				pages = Integer.parseInt(tfDPages.getText());
 
 				if (length > 0 && width > 0 && pages > 0)
 					item = new Document(length, width, pages);
+				else
+					throw new Exception();
 			}
 
-			else if (rdbtnProduct.getSelectedObjects().toString().equals("Product"))
-			{
+			else if (rdbtnProduct.getSelectedObjects().toString().equals("Product")) {
 				length = Double.parseDouble(tfPLength.getText());
 				width = Double.parseDouble(tfPWidth.getText());
 				height = Double.parseDouble(tfPHeight.getText());
@@ -682,6 +683,8 @@ public class Gui extends JFrame
 
 				if (length > 0 && width > 0 && height > 0 && weight > 0)
 					item = new Product(length, width, height, weight);
+				else
+					throw new Exception();
 			}
 
 			else if (rdbtnIrregular.getSelectedObjects().toString().equals("Irregular Product"))
@@ -694,10 +697,35 @@ public class Gui extends JFrame
 
 				if (length > 0 && width > 0 && height > 0 && weight > 0)
 					item = new Irregular(length, width, height, weight);
+				else
+					throw new Exception();
 			}
 
-			return item;
+			else
+				throw new Exception();
 
+			return item;
 		}
+		catch (Exception e)
+		{
+			throw e;
+		}
+	}
+
+	public void resetAll ()
+	{
+			tfDLength.setText(" ");
+			tfDWidth.setText(" ");
+			tfDPages.setText(" ");
+
+			tfPLength.setText(" ");
+			tfPWidth.setText(" ");
+			tfPHeight.setText(" ");
+			tfPWeight.setText(" ");
+
+			tfILength.setText(" ");
+			tfIWidth.setText(" ");
+			tfIHeight.setText(" ");
+			tfIWeight.setText(" ");
 	}
 }

@@ -38,8 +38,8 @@ public class Controller implements ActionListener
 		{
 			if (!gui.getDestination().equals("--- choose ---") && gui.getNum() > 0)
 			{
-
 				parcels.add(new Parcel (gui.getName(),gui.getDestination(),gui.getNum()));
+				gui.updateContentPane (gui.CREATE);
 			}
 			else
 				gui.updateContentPane (gui.SETUP);
@@ -70,7 +70,8 @@ public class Controller implements ActionListener
 				items.add(temp);
 				gui.resetAll();
 			}
-			parcels.get(i).setItems(items);
+			parcels.get(0).setItems(items);
+
 			gui.updateContentPane(gui.CHECKOUT);
 
 			if (gui.rdbtnDocument.isSelected())

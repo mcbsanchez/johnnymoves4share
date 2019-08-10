@@ -1,26 +1,42 @@
 import java.awt.event.*;
+import java.util.*;
 
 public class Controller implements ActionListener, ItemListener
 {
 	private Gui gui;
+	private ArrayList<Parcel> parcels = new ArrayList<>();
+	private ArrayList<Item> items = new ArrayList<> ();
 
-	public Controller (Gui gui)
+	public Controller (Gui gui, Parcel parcel)
 	{
 		this.gui = gui;
 		this.gui.addListeners(this);
 	}
 
+
+
+
 	// ActionListener
 	public void actionPerformed (ActionEvent e)
 	{
+		int i;
+		int countItems = gui.getNum();
 
 		if (e.getActionCommand ().equals ("Create Parcel"))
 		{
 			gui.updateContentPane (gui.SETUP);
+			if (!gui.getDestination().equals("--- choose ---") && gui.getNum() > 0)
+			{
+
+				parcels.add(new Parcel (gui.getName(),gui.getDestination(),gui.getNum()));
+			}
+			else
+				gui.updateContentPane (gui.SETUP);
 		}
 		else if (e.getActionCommand ().equals ("Track Parcel"))
 		{
 			gui.updateContentPane(gui.TRACK);
+
 		}
 		else if (e.getActionCommand ().equals ("Exit Program"))
 		{
@@ -28,7 +44,13 @@ public class Controller implements ActionListener, ItemListener
 		}
 		else if (e.getActionCommand().equals ("Add Items"))
 		{
-			gui.updateContentPane(gui.CREATE);
+			for (i = 0; i < countItems; i++)
+			{
+				gui.updateContentPane(gui.CREATE);
+				items.add(gui.createItem());
+				//reset values
+
+			}
 		}
 		else if (e.getActionCommand ().equals ("Document"))
 		{
@@ -86,14 +108,5 @@ public class Controller implements ActionListener, ItemListener
 
 	}
 
-	@Override
-	public void itemStateChanged(ItemEvent e)
-	{
-		if (e.getStateChange () == ItemEvent.SELECTED)
-		{
-
-		}
-
-	}
 
 }

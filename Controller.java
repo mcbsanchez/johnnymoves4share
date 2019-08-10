@@ -1,11 +1,16 @@
 import java.awt.event.*;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class Controller implements ActionListener
 {
 	private Gui gui;
 	private ArrayList<Parcel> parcels = new ArrayList<>();
+	int p = 0; // pang ilang parcel
 	private ArrayList<Item> items = new ArrayList<> ();
+	int parcelNumber = 0; // pang ilang parcel PER DAY
+	Calendar cal = Calendar.getInstance();
+	long start = System.nanoTime();
 
 	public Controller (Gui gui)
 	{
@@ -13,12 +18,26 @@ public class Controller implements ActionListener
 		this.gui.addListeners(this);
 	}
 
-
 	// ActionListener
 	public void actionPerformed (ActionEvent e)
 	{
 		int i;
 
+		//idk where to insert yung pang check ng time after each iteration?
+		//---start here--
+		long end = System.nanoTime();
+		long elapsedTime = end - start;
+		long convert = TimeUnit.SECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS); // ilang seconds nag pass
+		if (convert / 3 > 0) {
+			cal.add(Calendar.DAY_OF_YEAR, (int)convert/3);
+			System.out.println(convert);
+			start = System.nanoTime();
+			parcelNumber = 0;
+		}
+		//---end here--
+		p++; // <- yung pang ilang parcel
+		p--; // <- yung kapag nacancel (not sure if kailangan pa?)
+		long start = System.nanoTime();
 		Item temp = null;
 
 		if (e.getActionCommand ().equals ("Create Parcel"))

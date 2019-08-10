@@ -20,7 +20,7 @@ public class Parcel {
     /** Prints the available parcels and also computes for which items fit the parcel
      *
      */
-    public void showAvailableParcels()
+    public void setAvailableParcels()
     {
         /*
         i - number of spaces
@@ -110,16 +110,6 @@ public class Parcel {
             }
 
         }
-        System.out.println("Available Parcel Size");
-        for(i = 0; i < 6; i++)
-        {
-            if(available[i])
-                if(i < 2)
-                    System.out.println("FLAT PARCEL( "+SIZES[i][0]+" x "+SIZES[i][1]+" x "+SIZES[i][2]+" )");
-                else
-                    System.out.println("BOX PARCEL( "+SIZES[i][0]+" x "+SIZES[i][1]+" x "+SIZES[i][2]+" )");
-        }
-
     }
     /**Used by showAvailableParcels() method that is being used as a parameter in isFit
      * @param size - the dimensions taken from the space
@@ -539,6 +529,23 @@ public class Parcel {
     public boolean[]getAvailableParcels()
     {
         return available;
+    }
+
+    /**
+     * prints the available parcels
+     */
+    public void printAvailableParcels()
+    {
+        int i;
+        System.out.println("Available Parcel Size");
+        for(i = 0; i < 6; i++)
+        {
+            if(available[i])
+                if(i < 2)
+                    System.out.println("FLAT PARCEL( "+SIZES[i][0]+" x "+SIZES[i][1]+" x "+SIZES[i][2]+" )");
+                else
+                    System.out.println("BOX PARCEL( "+SIZES[i][0]+" x "+SIZES[i][1]+" x "+SIZES[i][2]+" )");
+        }
     }
 
     //Attributes

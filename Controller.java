@@ -90,8 +90,6 @@ public class Controller implements ActionListener
 				gui.radiobtns.clearSelection();
 				gui.updateContentPane(gui.CREATE);
 				gui.resetAll();
-
-
 			}
 
 			parcels.get(0).setItems(items);

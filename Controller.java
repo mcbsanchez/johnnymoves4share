@@ -59,13 +59,17 @@ public class Controller implements ActionListener, ItemListener
 			gui.radiobtns.clearSelection();
 			gui.updateDperType (gui.BLANK);
 		}
+		else if (e.getActionCommand().equals ("Back to Menu"))
+		{
+			gui.updateContentPane(gui.HOME);
+		}
 		else if (e.getActionCommand ().equals ("Track"))
 		{
 			gui.tfTracker.setText(" ");
 		}
-		else if (e.getActionCommand ().equals ("Exit"))
+		else if (e.getActionCommand ().equals ("Exit Program"))
 		{
-			
+			gui.updateContentPane(gui.HOME);
 		}
 		
 	}

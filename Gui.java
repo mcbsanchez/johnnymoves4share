@@ -17,6 +17,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 
 public class Gui extends JFrame
 {
@@ -45,6 +46,7 @@ public class Gui extends JFrame
 	private JPanel pnlProduct;
 	private JPanel pnlIrregular;
 	private JPanel pnlDone;
+	private JPanel pnlCBacktoMenu;
 	private JPanel pnlTrack;
 	private JPanel pnlExit;
 	
@@ -59,7 +61,9 @@ public class Gui extends JFrame
 	private JButton btnIAdd;
 	private JButton btnBackToMenu;
 	private JButton btnTrack;
+	private JButton btnTBackToMenu;
 	private JButton btnExitPass;
+	private JButton btnEBackToMenu;
 	
 	public ButtonGroup radiobtns;
 	
@@ -81,8 +85,12 @@ public class Gui extends JFrame
 	private JTextField tfIWeight;
 	public JTextField tfTracker;
 	
+	public JTextArea taReport;
+	public JTextArea taTracked;
+	
 	public JPasswordField pfPassword;
-
+	
+	private JLabel lblTracking;
 
 	
 	/**
@@ -90,9 +98,10 @@ public class Gui extends JFrame
 	 */
 	public Gui() 
 	{
+		super ("Johnny Moves");
 		initialize();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 500, 500);
 		setResizable(false);
 		setVisible (true);
 	}
@@ -111,22 +120,29 @@ public class Gui extends JFrame
 				pnlHome = new JPanel(null);
 				contentPane.add(pnlHome, HOME);
 				JLabel lblJohnnyMoves = new JLabel("JOHNNY MOVES");
-					lblJohnnyMoves.setFont(new Font("Trebuchet MS", Font.BOLD | Font.ITALIC, 28));
+					lblJohnnyMoves.setFont(new Font("Trebuchet MS", Font.BOLD | Font.ITALIC, 45));
 					lblJohnnyMoves.setHorizontalAlignment(SwingConstants.CENTER);
-					lblJohnnyMoves.setBounds(3, 6, 434, 42);
+					lblJohnnyMoves.setBounds(0, 6, 490, 100);
 				pnlHome.add(lblJohnnyMoves);
 				
 				btnCreate = new JButton("Create Parcel");
-				btnCreate.setBounds(43, 84, 100, 100);
+				btnCreate.setBounds(47, 381, 100, 50);
 				pnlHome.add(btnCreate);
 				
 				btnTrackParcel = new JButton("Track Parcel");
-				btnTrackParcel.setBounds(170, 84, 100, 100);
+				btnTrackParcel.setBounds(194, 381, 100, 50);
 				pnlHome.add(btnTrackParcel);
 				
 				btnExitProgram = new JButton("Exit Program");
-				btnExitProgram.setBounds(294, 84, 100, 100);
+				btnExitProgram.setBounds(341, 381, 100, 50);
 				pnlHome.add(btnExitProgram);
+				
+				taReport = new JTextArea();
+				taReport.setLineWrap(true);
+				taReport.setWrapStyleWord(true);
+				taReport.setEditable(false);
+				taReport.setBounds(20, 134, 450, 200);
+				pnlHome.add(taReport);
 			
 		// CREATE
 				pnlCreate = new JPanel();
@@ -153,29 +169,34 @@ public class Gui extends JFrame
 				spltAdd.setLeftComponent(pnlChoose);
 				pnlChoose.setLayout(new BorderLayout(0, 0));
 				
-				JLabel lblNewLabel_1 = new JLabel("Choose the type of item.");
-				lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
-				lblNewLabel_1.setVerticalAlignment(SwingConstants.TOP);
-				pnlChoose.add(lblNewLabel_1, BorderLayout.NORTH);
+				JLabel lblChoose = new JLabel("Choose the type of item.");
+				lblChoose.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+				lblChoose.setVerticalAlignment(SwingConstants.TOP);
+				pnlChoose.add(lblChoose, BorderLayout.NORTH);
 				
 				pnlTypes = new JPanel();
-				pnlChoose.add(pnlTypes, BorderLayout.CENTER);
+				pnlChoose.add(pnlTypes);
 				pnlTypes.setLayout(null);
 				
 				rdbtnIrregular = new JRadioButton("Irregular Product");
-				rdbtnIrregular.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
-				rdbtnIrregular.setBounds(20, 149, 127, 31);
+				rdbtnIrregular.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+				rdbtnIrregular.setBounds(6, 166, 155, 31);
 				pnlTypes.add(rdbtnIrregular);
 				
 				rdbtnProduct = new JRadioButton("Product");
-				rdbtnProduct.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
-				rdbtnProduct.setBounds(20, 89, 89, 31);
+				rdbtnProduct.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+				rdbtnProduct.setBounds(6, 103, 89, 31);
 				pnlTypes.add(rdbtnProduct);
 				
 				rdbtnDocument = new JRadioButton("Document");
-				rdbtnDocument.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
-				rdbtnDocument.setBounds(20, 29, 127, 31);
+				rdbtnDocument.setFont(new Font("Lucida Grande", Font.PLAIN, 14));
+				rdbtnDocument.setBounds(6, 40, 127, 31);
 				pnlTypes.add(rdbtnDocument);
+				
+				radiobtns = new ButtonGroup();
+				radiobtns.add(rdbtnDocument);
+				radiobtns.add(rdbtnProduct);
+				radiobtns.add(rdbtnIrregular);
 				
 				pnlDimensions = new JPanel();
 				spltAdd.setRightComponent(pnlDimensions);
@@ -190,7 +211,7 @@ public class Gui extends JFrame
 				pnlTally.add(lblNumberOfItems);
 				
 				JLabel lblTally = new JLabel("");
-				lblTally.setFont(new Font("Lucida Grande", Font.BOLD, 12));
+				lblTally.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 				pnlTally.add(lblTally);
 				
 				pnlDperType = new JPanel();
@@ -206,40 +227,40 @@ public class Gui extends JFrame
 				pnlDocument.setLayout(null);
 				
 				JLabel lblDLength = new JLabel("Length");
-				lblDLength.setBounds(20, 41, 61, 16);
+				lblDLength.setBounds(40, 60, 61, 16);
 				pnlDocument.add(lblDLength);
 				
 				tfDLength = new JTextField();
-				tfDLength.setBounds(108, 36, 130, 26);
+				tfDLength.setBounds(128, 55, 130, 26);
 				pnlDocument.add(tfDLength);
 				tfDLength.setColumns(10);
 				
 				JLabel lblDWidth = new JLabel("Width");
-				lblDWidth.setBounds(20, 80, 61, 16);
+				lblDWidth.setBounds(40, 127, 61, 16);
 				pnlDocument.add(lblDWidth);
 				
 				tfDWidth = new JTextField();
 				tfDWidth.setColumns(10);
-				tfDWidth.setBounds(108, 75, 130, 26);
+				tfDWidth.setBounds(128, 122, 130, 26);
 				pnlDocument.add(tfDWidth);
 				
 				JLabel lblDNoOfPages = new JLabel("No. of Pages");
-				lblDNoOfPages.setBounds(20, 122, 79, 16);
+				lblDNoOfPages.setBounds(40, 195, 79, 16);
 				pnlDocument.add(lblDNoOfPages);
 				
 				tfDPages = new JTextField();
 				tfDPages.setColumns(10);
-				tfDPages.setBounds(111, 117, 130, 26);
+				tfDPages.setBounds(131, 190, 130, 26);
 				pnlDocument.add(tfDPages);
 				
 				btnDAddItem = new JButton("Add Item");
-				btnDAddItem.setBounds(71, 157, 117, 29);
+				btnDAddItem.setBounds(96, 272, 117, 29);
 				pnlDocument.add(btnDAddItem);
 				
 				JLabel lblDInput = new JLabel("Please input the following dimensions in INCHES");
 				lblDInput.setHorizontalAlignment(SwingConstants.CENTER);
-				lblDInput.setFont(new Font("Lucida Grande", Font.PLAIN, 8));
-				lblDInput.setBounds(20, 6, 218, 16);
+				lblDInput.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+				lblDInput.setBounds(19, 19, 272, 16);
 				pnlDocument.add(lblDInput);
 				
 				pnlProduct = new JPanel();	
@@ -247,49 +268,49 @@ public class Gui extends JFrame
 				pnlProduct.setLayout(null);
 				
 				JLabel lblPLength = new JLabel("Length");
-				lblPLength.setBounds(25, 30, 61, 16);
+				lblPLength.setBounds(48, 69, 61, 16);
 				pnlProduct.add(lblPLength);
 				
 				tfPLength = new JTextField();
 				tfPLength.setColumns(10);
-				tfPLength.setBounds(113, 25, 130, 26);
+				tfPLength.setBounds(136, 64, 130, 26);
 				pnlProduct.add(tfPLength);
 				
 				JLabel lblPWidth = new JLabel("Width");
-				lblPWidth.setBounds(25, 63, 61, 16);
+				lblPWidth.setBounds(48, 126, 61, 16);
 				pnlProduct.add(lblPWidth);
 				
 				tfPWidth = new JTextField();
 				tfPWidth.setColumns(10);
-				tfPWidth.setBounds(113, 58, 130, 26);
+				tfPWidth.setBounds(136, 121, 130, 26);
 				pnlProduct.add(tfPWidth);
 				
 				JLabel lblPHeight = new JLabel("Height");
-				lblPHeight.setBounds(25, 96, 61, 16);
+				lblPHeight.setBounds(48, 183, 61, 16);
 				pnlProduct.add(lblPHeight);
 				
 				tfPHeight = new JTextField();
 				tfPHeight.setColumns(10);
-				tfPHeight.setBounds(113, 91, 130, 26);
+				tfPHeight.setBounds(136, 178, 130, 26);
 				pnlProduct.add(tfPHeight);
 				
 				JLabel lblPWeight = new JLabel("Weight");
-				lblPWeight.setBounds(25, 129, 61, 16);
+				lblPWeight.setBounds(48, 240, 61, 16);
 				pnlProduct.add(lblPWeight);
 				
 				tfPWeight = new JTextField();
 				tfPWeight.setColumns(10);
-				tfPWeight.setBounds(113, 124, 130, 26);
+				tfPWeight.setBounds(136, 235, 130, 26);
 				pnlProduct.add(tfPWeight);
 				
 				btnPAdd = new JButton("Add Item");
-				btnPAdd.setBounds(71, 157, 117, 29);
+				btnPAdd.setBounds(96, 305, 117, 29);
 				pnlProduct.add(btnPAdd);
 				
 				JLabel lblPInput = new JLabel("Please input the following dimensions in INCHES");
 				lblPInput.setHorizontalAlignment(SwingConstants.CENTER);
-				lblPInput.setFont(new Font("Lucida Grande", Font.PLAIN, 8));
-				lblPInput.setBounds(21, 6, 218, 16);
+				lblPInput.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+				lblPInput.setBounds(13, 23, 283, 16);
 				pnlProduct.add(lblPInput);
 				
 				pnlIrregular = new JPanel();
@@ -297,49 +318,49 @@ public class Gui extends JFrame
 				pnlIrregular.setLayout(null);
 				
 				JLabel lblILength = new JLabel("Length");
-				lblILength.setBounds(25, 33, 61, 16);
+				lblILength.setBounds(43, 62, 61, 16);
 				pnlIrregular.add(lblILength);
 				
 				tfILength = new JTextField();
 				tfILength.setColumns(10);
-				tfILength.setBounds(113, 28, 130, 26);
+				tfILength.setBounds(131, 57, 130, 26);
 				pnlIrregular.add(tfILength);
 				
 				JLabel lblIWidth = new JLabel("Width");
-				lblIWidth.setBounds(25, 66, 61, 16);
+				lblIWidth.setBounds(43, 116, 61, 16);
 				pnlIrregular.add(lblIWidth);
 				
 				tfIWidth = new JTextField();
 				tfIWidth.setColumns(10);
-				tfIWidth.setBounds(113, 61, 130, 26);
+				tfIWidth.setBounds(131, 111, 130, 26);
 				pnlIrregular.add(tfIWidth);
 				
 				JLabel lblIHeight = new JLabel("Height");
-				lblIHeight.setBounds(25, 99, 61, 16);
+				lblIHeight.setBounds(43, 170, 61, 16);
 				pnlIrregular.add(lblIHeight);
 				
 				tfIHeight = new JTextField();
 				tfIHeight.setColumns(10);
-				tfIHeight.setBounds(113, 94, 130, 26);
+				tfIHeight.setBounds(131, 165, 130, 26);
 				pnlIrregular.add(tfIHeight);
 				
 				JLabel lblIWeight = new JLabel("Weight");
-				lblIWeight.setBounds(25, 132, 61, 16);
+				lblIWeight.setBounds(43, 224, 61, 16);
 				pnlIrregular.add(lblIWeight);
 				
 				tfIWeight = new JTextField();
 				tfIWeight.setColumns(10);
-				tfIWeight.setBounds(113, 127, 130, 26);
+				tfIWeight.setBounds(131, 219, 130, 26);
 				pnlIrregular.add(tfIWeight);
 				
 				btnIAdd = new JButton("Add Item");
-				btnIAdd.setBounds(71, 157, 117, 29);
+				btnIAdd.setBounds(96, 296, 117, 29);
 				pnlIrregular.add(btnIAdd);
 				
 				JLabel lblIInput = new JLabel("Please input the following with the largest dimensions for each in INCHES");
 				lblIInput.setHorizontalAlignment(SwingConstants.CENTER);
-				lblIInput.setFont(new Font("Lucida Grande", Font.PLAIN, 7));
-				lblIInput.setBounds(6, 6, 248, 26);
+				lblIInput.setFont(new Font("Lucida Grande", Font.PLAIN, 8));
+				lblIInput.setBounds(6, 19, 298, 26);
 				pnlIrregular.add(lblIInput);
 				
 				// DONE ADDING
@@ -349,21 +370,23 @@ public class Gui extends JFrame
 				
 				JLabel lblReady = new JLabel("Your parcel is set. The tracking number is:");
 				lblReady.setHorizontalAlignment(SwingConstants.CENTER);
-				lblReady.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
-				lblReady.setBounds(6, 48, 248, 16);
+				lblReady.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+				lblReady.setBounds(18, 56, 273, 16);
 				pnlDone.add(lblReady);
 				
 				JLabel lblTrackNum = new JLabel("");
-				lblTrackNum.setFont(new Font("Lucida Grande", Font.BOLD, 11));
+				lblTrackNum.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 				lblTrackNum.setForeground(Color.BLUE);
-				lblTrackNum.setBounds(6, 86, 248, 16);
+				lblTrackNum.setBounds(31, 129, 248, 16);
 				pnlDone.add(lblTrackNum);
+				
+				pnlCBacktoMenu = new JPanel();
+				pnlCreate.add(pnlCBacktoMenu, BorderLayout.SOUTH);
+				pnlCBacktoMenu.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 				
 				btnBackToMenu = new JButton("Back to Menu");
 				btnBackToMenu.setBounds(74, 154, 117, 29);
-				pnlDone.add(btnBackToMenu);
-				
-				
+				pnlCBacktoMenu.add(btnBackToMenu);
 				
 		// TRACK
 				pnlTrack = new JPanel();
@@ -371,26 +394,36 @@ public class Gui extends JFrame
 				contentPane.add(pnlTrack, TRACK);
 				pnlTrack.setLayout(null);
 				
-				JLabel lblInputTrackingNumber = new JLabel("Input Tracking Number of Parcel:");
+				JLabel lblInputTrack = new JLabel("Input Tracking Number of Parcel:");
 				
-				lblInputTrackingNumber.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
-				lblInputTrackingNumber.setHorizontalAlignment(SwingConstants.CENTER);
-				lblInputTrackingNumber.setBounds(65, 33, 309, 16);
-				pnlTrack.add(lblInputTrackingNumber);
+				lblInputTrack.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
+				lblInputTrack.setHorizontalAlignment(SwingConstants.LEFT);
+				lblInputTrack.setBounds(20, 111, 192, 16);
+				pnlTrack.add(lblInputTrack);
 				
 				tfTracker = new JTextField();
-				tfTracker.setBounds(75, 61, 179, 26);
+				tfTracker.setBounds(20, 129, 206, 26);
 				pnlTrack.add(tfTracker);
-				tfTracker.setColumns(25);
+				tfTracker.setColumns(40);
 				
-				JTextArea taTracked = new JTextArea();
-				taTracked.setBounds(65, 106, 309, 139);
+				taTracked = new JTextArea();
+				taTracked.setBounds(20, 166, 450, 200);
 				pnlTrack.add(taTracked);
 				
 				btnTrack = new JButton("Track");
 				btnTrack.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
-				btnTrack.setBounds(254, 61, 117, 29);
+				btnTrack.setBounds(236, 129, 130, 27);
 				pnlTrack.add(btnTrack);
+				
+				lblTracking = new JLabel("TRACKING");
+				lblTracking.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 42));
+				lblTracking.setHorizontalAlignment(SwingConstants.CENTER);
+				lblTracking.setBounds(101, 6, 287, 92);
+				pnlTrack.add(lblTracking);
+				
+				btnTBackToMenu = new JButton("Back to Menu");
+				btnTBackToMenu.setBounds(186, 404, 117, 41);
+				pnlTrack.add(btnTBackToMenu);
 				
 				
 				
@@ -401,17 +434,22 @@ public class Gui extends JFrame
 				pnlExit.setLayout(null);
 				
 				JLabel lblExit = new JLabel("Please input admin password to exit.");
+				lblExit.setFont(new Font("Lucida Grande", Font.PLAIN, 20));
 				lblExit.setHorizontalAlignment(SwingConstants.CENTER);
-				lblExit.setBounds(77, 84, 285, 16);
+				lblExit.setBounds(6, 135, 478, 26);
 				pnlExit.add(lblExit);
 				
 				pfPassword = new JPasswordField();
-				pfPassword.setBounds(101, 112, 235, 26);
+				pfPassword.setBounds(127, 196, 235, 26);
 				pnlExit.add(pfPassword);
 				
 				btnExitPass = new JButton("Exit Program");
-				btnExitPass.setBounds(161, 168, 117, 29);
+				btnExitPass.setBounds(252, 292, 145, 45);
 				pnlExit.add(btnExitPass);
+				
+				btnEBackToMenu = new JButton("Back to Menu");
+				btnEBackToMenu.setBounds(95, 292, 145, 45);
+				pnlExit.add(btnEBackToMenu);
 				
 			getContentPane().add(contentPane);
 	}
@@ -427,13 +465,13 @@ public class Gui extends JFrame
 		btnIAdd.addActionListener((ActionListener) listener);
 		btnBackToMenu.addActionListener((ActionListener) listener);
 		btnTrack.addActionListener((ActionListener) listener);
+		btnTBackToMenu.addActionListener((ActionListener) listener);
 		btnExitPass.addActionListener((ActionListener) listener);
-		
+		btnEBackToMenu.addActionListener((ActionListener) listener);
 		
 		rdbtnDocument.addActionListener((ActionListener) listener);
 		rdbtnProduct.addActionListener((ActionListener) listener);
 		rdbtnIrregular.addActionListener((ActionListener) listener);
-
 	}
 	
 	public void updateContentPane (String name)

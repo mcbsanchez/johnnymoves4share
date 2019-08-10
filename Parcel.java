@@ -257,8 +257,8 @@ public class Parcel {
         return condition;
     }
 
-    /**
-     * @return
+    /**Checks if the item is too heavy for the flat parcel
+     * @return boolean if the total weight of the item is greater than 3
      */
     private boolean isTooHeavy()
     {
@@ -266,9 +266,8 @@ public class Parcel {
     }
 
 
-
-    /**
-     * @param choice
+    /**Sets the insurance of the item to either true or false
+     * @param choice either yes or no (will only be yes if inputed yes, no otherwise)
      */
     public void setInsurance(String choice)
     {

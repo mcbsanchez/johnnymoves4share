@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+
 public class Driver {
 
 //    public static void main(String []args)
@@ -12,11 +13,10 @@ public class Driver {
 //        Controller controller =  new Controller(gui);
 ////        gui.init();
 //    }
-    public static void main(String[] args)
-    {
-        Gui gui = new Gui ();
-        Controller controller = new Controller (gui);
-
+    public static void main(String[] args) {
+        Gui gui = new Gui();
+        Controller controller = new Controller(gui);
+    }
 //        long start = System.nanoTime();
 //        Calendar cal = Calendar.getInstance();
 //        Scanner sc = new Scanner(System.in);
@@ -76,5 +76,4 @@ public class Driver {
 //            }
 //        }
 
-    }
 }

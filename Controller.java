@@ -3,17 +3,17 @@ import java.awt.event.*;
 public class Controller implements ActionListener, ItemListener
 {
 	private Gui gui;
-	
+
 	public Controller (Gui gui)
 	{
 		this.gui = gui;
 		this.gui.addListeners(this);
 	}
-	
+
 	// ActionListener
 	public void actionPerformed (ActionEvent e)
 	{
-		
+
 		if (e.getActionCommand ().equals ("Create Parcel"))
 		{
 			gui.updateContentPane (gui.CREATE);
@@ -49,7 +49,7 @@ public class Controller implements ActionListener, ItemListener
 			{
 				gui.radiobtns.clearSelection();
 				gui.clearDProduct();
-				
+
 			}
 			else if (gui.rdbtnIrregular.isSelected())
 			{
@@ -71,17 +71,17 @@ public class Controller implements ActionListener, ItemListener
 		{
 			gui.updateContentPane(gui.HOME);
 		}
-		
+
 	}
 
 	@Override
-	public void itemStateChanged(ItemEvent e) 
+	public void itemStateChanged(ItemEvent e)
 	{
 		if (e.getStateChange () == ItemEvent.SELECTED)
 		{
-			
+
 		}
-		
+
 	}
 
 }

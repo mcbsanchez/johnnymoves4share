@@ -71,6 +71,7 @@ public class Controller implements ActionListener
 				gui.resetAll();
 			}
 			parcels.get(0).setItems(items);
+
 			gui.updateContentPane(gui.CHECKOUT);
 
 			if (gui.rdbtnDocument.isSelected())

@@ -68,6 +68,7 @@ public class Gui extends JFrame
 	private JButton btnPAdd;
 	private JButton btnIAdd;
 	private JButton btnBackToMenu;
+	private JButton btnBackToMenu_3;
 	private JButton btnBreakdown;
 	private JButton btnBackToMenu_2;
 	private JButton btnProceed;
@@ -102,7 +103,7 @@ public class Gui extends JFrame
 	private JTextArea taReport;
 	private JTextArea taTracked;
 
-	private JPasswordField pfPassword;
+	private JTextField tfPassword;
 
 	private JLabel lblTracking;
 	private JLabel LBL;
@@ -183,7 +184,7 @@ public class Gui extends JFrame
 
 		btnAddItems = new JButton("Add Items");
 		btnAddItems.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		btnAddItems.setBounds(182, 337, 125, 50);
+		btnAddItems.setBounds(285, 349, 125, 50);
 		pnlSetup.add(btnAddItems);
 
 		LBL = new JLabel("CREATE");
@@ -210,6 +211,11 @@ public class Gui extends JFrame
 		cbDestination.setMaximumRowCount(4);
 		cbDestination.setBounds(181, 187, 240, 27);
 		pnlSetup.add(cbDestination);
+
+		btnBackToMenu_3 = new JButton("Back To Menu");
+		btnBackToMenu_3.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		btnBackToMenu_3.setBounds(80, 349, 125, 50);
+		pnlSetup.add(btnBackToMenu_3);
 
 		// CREATE
 		pnlCreate = new JPanel();
@@ -545,9 +551,9 @@ public class Gui extends JFrame
 		lblExit.setBounds(6, 135, 478, 26);
 		pnlExit.add(lblExit);
 
-		pfPassword = new JPasswordField();
-		pfPassword.setBounds(127, 196, 235, 26);
-		pnlExit.add(pfPassword);
+		tfPassword = new JTextField();
+		tfPassword.setBounds(127, 196, 235, 26);
+		pnlExit.add(tfPassword);
 
 		btnExitPass = new JButton("Exit Program");
 		btnExitPass.setBounds(252, 292, 145, 45);
@@ -572,6 +578,7 @@ public class Gui extends JFrame
 		btnBackToMenu.addActionListener((ActionListener) listener);
 		btnBreakdown.addActionListener((ActionListener) listener);
 		btnBackToMenu_2.addActionListener((ActionListener) listener);
+		btnBackToMenu_3.addActionListener((ActionListener) listener);
 		btnProceed.addActionListener((ActionListener) listener);
 		btnTrack.addActionListener((ActionListener) listener);
 		btnTBackToMenu.addActionListener((ActionListener) listener);
@@ -745,5 +752,10 @@ public class Gui extends JFrame
 	public JComboBox<String> getCombo ()
 	{
 		return comboBox;
+	}
+
+	public JTextField getTfPassword ()
+	{
+		return tfPassword;
 	}
 }

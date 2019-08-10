@@ -23,6 +23,8 @@ public class Controller implements ActionListener
 	{
 		int i;
 
+		char[] pass;
+
 		//idk where to insert yung pang check ng time after each iteration?
 		//---start here--
 		long end = System.nanoTime();
@@ -119,7 +121,8 @@ public class Controller implements ActionListener
 		}
 		else if (e.getActionCommand ().equals ("Exit Program"))
 		{
-			gui.updateContentPane(gui.HOME);
+			if (gui.getTfPassword().getText().toString().equalsIgnoreCase("ASAPAP"));
+				System.exit(0);
 		}
 
 	}

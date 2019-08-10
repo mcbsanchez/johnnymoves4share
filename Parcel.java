@@ -5,6 +5,11 @@ import java.util.Set;
 
 public class Parcel {
 
+    /**
+     * @param recipient
+     * @param destination
+     * @param countItems
+     */
     public Parcel (String recipient, String destination, int countItems)
     {
         this.recipient = recipient;
@@ -12,6 +17,9 @@ public class Parcel {
         this.countItems = countItems;
     }
 
+    /**
+     * @param items
+     */
     public void addItem (ArrayList<Item> items)
     {
 //        System.out.println(items.get(0).getWeight());
@@ -23,6 +31,9 @@ public class Parcel {
 //        System.out.println(this.items.get(2).getWeight());
     }
 
+    /**
+     *
+     */
     public void showAvailableParcels()
     {
         /*
@@ -124,12 +135,24 @@ public class Parcel {
         }
 
     }
+
+    /**
+     * @param size
+     * @param item
+     * @return
+     */
     private double[][]createNewSpace(double[] size, double[] item)
     {
         return new double[][]{  {size[0] - item[0], size[1], size[2]},
                                 {size[0], size[1] - item[1], size[2]},
                                 {size[0], size[1], size[2] - item[2]}};
     }
+
+    /**
+     * @param size
+     * @param items
+     * @return
+     */
     private boolean isFit(double[][] size, ArrayList<Item> items)
     {
         ArrayList<Item> tempItems = new ArrayList<>(items);
@@ -195,11 +218,17 @@ public class Parcel {
         return condition;
     }
 
+    /**
+     * @return
+     */
     private boolean isTooHeavy()
     {
         return getTotalWeight() > 3;
     }
 
+    /**
+     * @param n
+     */
     public void setType(int n)
     {
         if(n < 2)
@@ -224,6 +253,9 @@ public class Parcel {
         }
     }
 
+    /**
+     * @param choice
+     */
     public void setInsurance(String choice)
     {
         if (choice.equalsIgnoreCase("Yes"))
@@ -235,9 +267,17 @@ public class Parcel {
     }
 
     public void generateTrackingNum() {
-        track = new TrackNum(this);
+        if(countItems == items.size()
+                && daySent.get(Calendar.DATE) != 0
+                && destination != null
+                && sequenceNumber != 0
+                && type != null)
+            track = new TrackNum(this);
     }
 
+    /**
+     * @return
+     */
     public String getTrackingNum()
     {
         return track.toString();

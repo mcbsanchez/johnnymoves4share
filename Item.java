@@ -1,20 +1,50 @@
+/**
+ * Item class is the main class of Document
+ *
+ * @author Martin Christopher B. Sanchez & Earth Wendell B. Lopez
+ */
 public abstract class Item
 {
+    /**Constructor for Item
+     * @param length - double length of the item in
+     * @param width - double width of the item
+     */
     public Item (double length, double width)
     {
         this.length = length;
         this.width = width;
     }
+
+    /**Returns the length of the item
+     * @return length - double val length of the item
+     */
     public double getLength()
     {
         return length;
     }
+
+    /**Returns the length of the item
+     * @return length - double val width of the item
+     */
     public double getWidth()
     {
         return width;
     }
+
+    /**Returns the length of the item
+     * @return length - double val height of the item
+     */
     public abstract double getHeight();
+
+    /**Returns the length of the item
+     * @return length - double val weight of the item
+     */
     public abstract double getWeight();
+
+    /**Rotate return a double[] value of the specific orientation given "this"(item)'s length,width and height
+     * @param orientation - int value that asks for 6 different rotational movements from 0-5
+     * @return dimensions - double[] that give a certain arrangement of the length(l), width(w), and height(h)
+     */
     public double[] rotate(int orientation)
     {
         double l = getLength();
@@ -33,6 +63,10 @@ public abstract class Item
             dimensions = new double[]{w, h, l};
         return dimensions;
     }
+
+    /**Attributes of the item
+     * length and width are stored in the Item class as every sub class has this
+     */
     private double length;
     private double width;
 

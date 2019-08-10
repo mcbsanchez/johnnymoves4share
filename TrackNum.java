@@ -1,5 +1,13 @@
+/**
+ *  TrackNum class is a composition of a complete Item class
+ *
+ *  * @author Martin Christopher B. Sanchez & Earth Wendell B. Lopez
+ */
 public class TrackNum
 {
+	/**
+	 * @param p is the parcel, which is used by the Parcel class as "this"
+	 */
 	public TrackNum (Parcel p)
 	{
 		parcelType = p.getType();
@@ -44,7 +52,10 @@ public class TrackNum
 
 
 	}
-	
+
+	/**
+	 * @return
+	 */
 	public String toString()
 	{
 		return parcelType + month + day + destinationCode + max + seq;

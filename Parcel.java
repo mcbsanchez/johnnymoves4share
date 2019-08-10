@@ -534,18 +534,6 @@ public class Parcel {
     }
 
     //Attributes
-    /**DESTINATIONS
-     * SIZES
-     * PARCELTYPE
-     * CURRENTSTATUS
-     *
-     * recipient - initialized in the constructor
-     * destination - initialized in the constructor
-     * countItems - initialized in the constructor
-     *
-     * available
-     * 
-     */
     private static String[] DESTINATIONS = {"Metro Manila","Provincial Luzon", "Visayas", "Mindanao"};
     private double[][] SIZES = {{9, 14, 1}, {12, 18, 3}, {12, 10, 5}, {14, 11, 7}, {18, 12, 9}, {20, 16, 12}};
     private static String[] PARCELTYPE = {"FLT","BOX"};

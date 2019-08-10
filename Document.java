@@ -33,7 +33,7 @@ public class Document extends Item
         return (pages-1)/25 + 1;
     }
 
-    /** Returns the weigght in double val
+    /** Returns the weight in double val
      * @return weight - double val of the computed weight of the document given a number of pages
      */
     public double getWeight()

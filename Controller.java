@@ -9,7 +9,13 @@ public class Controller implements ActionListener, ItemListener
 		this.gui = gui;
 		this.gui.addListeners(this);
 	}
+<<<<<<< Updated upstream
 
+=======
+	ArrayList<Parcel> p = new ArrayList<>();
+	ArrayList<Item> i = new ArrayList<>();
+	int a = 0;
+>>>>>>> Stashed changes
 	// ActionListener
 	public void actionPerformed (ActionEvent e)
 	{
@@ -28,6 +34,13 @@ public class Controller implements ActionListener, ItemListener
 		}
 		else if (e.getActionCommand().equals ("Add Items"))
 		{
+<<<<<<< Updated upstream
+=======
+			ArrayList<Item> i = new ArrayList<>();
+			p.add(new Parcel(gui.tfName.getText(),
+					gui.cbDestination.getSelectedItem().toString(),
+					Integer.parseInt((gui.tfCount.getText()))));
+>>>>>>> Stashed changes
 			gui.updateContentPane(gui.CREATE);
 		}
 		else if (e.getActionCommand ().equals ("Document"))
@@ -44,21 +57,27 @@ public class Controller implements ActionListener, ItemListener
 		}
 		else if (e.getActionCommand ().equals ("Add Item"))
 		{
-			if (gui.rdbtnDocument.isSelected())
+			if(p.get(a).getNumOfItems() != i.size())
 			{
-				gui.radiobtns.clearSelection();
-				gui.clearDDocument();
-			}
-			else if (gui.rdbtnProduct.isSelected())
-			{
-				gui.radiobtns.clearSelection();
-				gui.clearDProduct();
+				if (gui.rdbtnDocument.isSelected()) {
+					i.add(new Document(Integer.parseInt(gui.tfDLength.getText()),
+							Integer.parseInt(gui.tfDWidth.getText()),
+							Integer.parseInt(gui.tfDPages.getText())));
+					gui.radiobtns.clearSelection();
+					gui.clearDDocument();
+				} else if (gui.rdbtnProduct.isSelected()) {
+					i.add(new Product(Integer.parseInt(gui.tfILength.getText()),
+							Integer.parseInt(gui.tfPWidth.getText()),
+							Integer.parseInt(gui.tfPHeight.getText()),
+							Integer.parseInt(gui.tfPWeight.getText())));
+					gui.radiobtns.clearSelection();
+					gui.clearDProduct();
 
-			}
-			else if (gui.rdbtnIrregular.isSelected())
-			{
-				gui.radiobtns.clearSelection();
-				gui.clearDIrregular();
+				} else if (gui.rdbtnIrregular.isSelected()) {
+					gui.radiobtns.clearSelection();
+					gui.clearDIrregular();
+				}
+				a++;
 			}
 			gui.radiobtns.clearSelection();
 			gui.updateDperType (gui.BLANK);

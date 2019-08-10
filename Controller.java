@@ -1,4 +1,5 @@
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class Controller implements ActionListener, ItemListener
 {
@@ -9,13 +10,11 @@ public class Controller implements ActionListener, ItemListener
 		this.gui = gui;
 		this.gui.addListeners(this);
 	}
-<<<<<<< Updated upstream
 
-=======
 	ArrayList<Parcel> p = new ArrayList<>();
 	ArrayList<Item> i = new ArrayList<>();
 	int a = 0;
->>>>>>> Stashed changes
+
 	// ActionListener
 	public void actionPerformed (ActionEvent e)
 	{
@@ -34,13 +33,11 @@ public class Controller implements ActionListener, ItemListener
 		}
 		else if (e.getActionCommand().equals ("Add Items"))
 		{
-<<<<<<< Updated upstream
-=======
 			ArrayList<Item> i = new ArrayList<>();
 			p.add(new Parcel(gui.tfName.getText(),
 					gui.cbDestination.getSelectedItem().toString(),
 					Integer.parseInt((gui.tfCount.getText()))));
->>>>>>> Stashed changes
+
 			gui.updateContentPane(gui.CREATE);
 		}
 		else if (e.getActionCommand ().equals ("Document"))

@@ -33,6 +33,9 @@ public class Gui extends JFrame
 	public final String DOCUMENT = "Document";
 	public final String PRODUCT = "Product";
 	public final String IRREGULAR = "Irregular";
+	public final String CHECKOUT = "Checkout";
+	public final String INSURE = "Insure";
+	public final String BREAKDOWN = "Breakdown";
 	public final String DONE = "Done";
 
 	private JPanel contentPane;
@@ -48,25 +51,30 @@ public class Gui extends JFrame
 	private JPanel pnlDocument;
 	private JPanel pnlProduct;
 	private JPanel pnlIrregular;
-	private JPanel pnlDone;
+	private JPanel pnlCheckout;
+	private JPanel pnlInsure;
+	private JPanel pnlBreakdown;
 	private JPanel pnlCBacktoMenu;
 	private JPanel pnlTrack;
 	private JPanel pnlExit;
 
 	private JSplitPane spltAdd;
 
-	private JButton btnCreate;
-	private JButton btnTrackParcel;
-	private JButton btnExitProgram;
-	private JButton btnAddItems;
-	private JButton btnDAddItem;
-	private JButton btnPAdd;
-	private JButton btnIAdd;
-	private JButton btnBackToMenu;
-	private JButton btnTrack;
-	private JButton btnTBackToMenu;
-	private JButton btnExitPass;
-	private JButton btnEBackToMenu;
+	public JButton btnCreate;
+	public JButton btnTrackParcel;
+	public JButton btnExitProgram;
+	public JButton btnAddItems;
+	public JButton btnDAddItem;
+	public JButton btnPAdd;
+	public JButton btnIAdd;
+	public JButton btnBackToMenu;
+	public JButton btnBreakdown;
+	public JButton btnBackToMenu_2;
+	public JButton btnProceed;
+	public JButton btnTrack;
+	public JButton btnTBackToMenu;
+	public JButton btnExitPass;
+	public JButton btnEBackToMenu;
 
 	public ButtonGroup radiobtns;
 
@@ -99,8 +107,13 @@ public class Gui extends JFrame
 	private JLabel LBL;
 	private JLabel lblNameOfRecipient;
 	private JLabel lblDestination;
+	private JButton btnBackToMenu_1;
+	private JLabel lblCreate_1;
+	private JLabel lblBreakdownOfFees;
+	private JLabel lblBreakdown;
 
-
+	public JComboBox<String> cbDestination;
+	
 	/**
 	 * Create the application.
 	 */
@@ -173,7 +186,7 @@ public class Gui extends JFrame
 
 		LBL = new JLabel("CREATE");
 		LBL.setHorizontalAlignment(SwingConstants.CENTER);
-		LBL.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 42));
+		LBL.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 72));
 		LBL.setBounds(6, 6, 478, 93);
 		pnlSetup.add(LBL);
 
@@ -190,8 +203,8 @@ public class Gui extends JFrame
 		pnlSetup.add(tfName);
 		tfName.setColumns(25);
 
-		JComboBox<String> cbDestination = new JComboBox<String>();
-		cbDestination.setModel(new DefaultComboBoxModel<String>(new String[] {"Metro Manila (MML)", "Luzon (LUZ)", "Visayas (VIS)", "Mindanao (MIN)"}));
+		cbDestination = new JComboBox<String>();
+		cbDestination.setModel(new DefaultComboBoxModel(new String[] {"--- choose ---", "Metro Manila (MML)", "Luzon (LUZ)", "Visayas (VIS)", "Mindanao (MIN)"}));
 		cbDestination.setMaximumRowCount(4);
 		cbDestination.setBounds(181, 187, 240, 27);
 		pnlSetup.add(cbDestination);
@@ -402,23 +415,6 @@ public class Gui extends JFrame
 		lblIInput.setBounds(6, 20, 298, 26);
 		pnlIrregular.add(lblIInput);
 
-		// DONE ADDING
-		pnlDone = new JPanel();
-		pnlDperType.add(pnlDone, DONE);
-		pnlDone.setLayout(null);
-
-		JLabel lblReady = new JLabel("Your parcel is set. The tracking number is:");
-		lblReady.setHorizontalAlignment(SwingConstants.CENTER);
-		lblReady.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
-		lblReady.setBounds(18, 56, 273, 16);
-		pnlDone.add(lblReady);
-
-		JLabel lblTrackNum = new JLabel("");
-		lblTrackNum.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		lblTrackNum.setForeground(Color.BLUE);
-		lblTrackNum.setBounds(31, 129, 248, 16);
-		pnlDone.add(lblTrackNum);
-
 		pnlCBacktoMenu = new JPanel();
 		pnlCreate.add(pnlCBacktoMenu, BorderLayout.SOUTH);
 		pnlCBacktoMenu.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -426,6 +422,75 @@ public class Gui extends JFrame
 		btnBackToMenu = new JButton("Back to Menu");
 		btnBackToMenu.setBounds(74, 154, 117, 29);
 		pnlCBacktoMenu.add(btnBackToMenu);
+
+		// CHECKOUT
+		pnlCheckout = new JPanel();
+		contentPane.add(pnlCheckout, CHECKOUT);
+		pnlCheckout.setLayout(new CardLayout(0, 0));
+
+		// INSURE
+		pnlInsure = new JPanel();
+		pnlCheckout.add(pnlInsure, INSURE);
+		pnlInsure.setLayout(null);
+
+		JLabel lblInsureParcel = new JLabel("Insure Parcel?");
+		lblInsureParcel.setBounds(52, 243, 115, 16);
+		pnlInsure.add(lblInsureParcel);
+
+		JLabel lblAvailableParcels = new JLabel("Available Parcels:");
+		lblAvailableParcels.setBounds(52, 169, 115, 16);
+		pnlInsure.add(lblAvailableParcels);
+
+		JComboBox<String> comboBox = new JComboBox<>();
+		comboBox.setModel(new DefaultComboBoxModel<>(new String[] {"----- choose -----"}));
+		comboBox.setBounds(213, 164, 228, 27);
+		pnlInsure.add(comboBox);
+
+		JLabel lblCreate = new JLabel("CREATE");
+		lblCreate.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 72));
+		lblCreate.setBounds(91, 41, 308, 71);
+		pnlInsure.add(lblCreate);
+
+		btnBreakdown = new JButton("See Breakdown");
+		btnBreakdown.setBounds(285, 336, 125, 50);
+		pnlInsure.add(btnBreakdown);
+
+		JComboBox<String> comboBox_1 = new JComboBox<>();
+		comboBox_1.setModel(new DefaultComboBoxModel<>(new String[] {"-- choose --", "Yes", "No"}));
+		comboBox_1.setBounds(300, 238, 141, 27);
+		pnlInsure.add(comboBox_1);
+
+		btnBackToMenu_1 = new JButton("Back to Menu");
+		btnBackToMenu_1.setBounds(80, 336, 125, 50);
+		pnlInsure.add(btnBackToMenu_1);
+
+		// BREAKDOWN
+		pnlBreakdown = new JPanel();
+		pnlCheckout.add(pnlBreakdown, BREAKDOWN);
+		pnlBreakdown.setLayout(null);
+
+		lblCreate_1 = new JLabel("CREATE");
+		lblCreate_1.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 72));
+		lblCreate_1.setBounds(92, 6, 305, 82);
+		pnlBreakdown.add(lblCreate_1);
+
+		lblBreakdownOfFees = new JLabel("Breakdown of Fees:");
+		lblBreakdownOfFees.setBounds(73, 103, 133, 16);
+		pnlBreakdown.add(lblBreakdownOfFees);
+
+		lblBreakdown = new JLabel("");
+		lblBreakdown.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblBreakdown.setBounds(73, 131, 324, 199);
+		pnlBreakdown.add(lblBreakdown);
+
+		btnBackToMenu_2 = new JButton("Back to Menu");
+		btnBackToMenu_2.setBounds(63, 369, 150, 50);
+		pnlBreakdown.add(btnBackToMenu_2);
+
+		btnProceed = new JButton("Proceed");
+		btnProceed.setBounds(275, 369, 150, 50);
+		pnlBreakdown.add(btnProceed);
+
 
 		// TRACK
 		pnlTrack = new JPanel();
@@ -503,6 +568,9 @@ public class Gui extends JFrame
 		btnPAdd.addActionListener((ActionListener) listener);
 		btnIAdd.addActionListener((ActionListener) listener);
 		btnBackToMenu.addActionListener((ActionListener) listener);
+		btnBreakdown.addActionListener((ActionListener) listener);
+		btnBackToMenu_2.addActionListener((ActionListener) listener);
+		btnProceed.addActionListener((ActionListener) listener);
 		btnTrack.addActionListener((ActionListener) listener);
 		btnTBackToMenu.addActionListener((ActionListener) listener);
 		btnExitPass.addActionListener((ActionListener) listener);
@@ -523,6 +591,12 @@ public class Gui extends JFrame
 	{
 		CardLayout cards_1 = (CardLayout) pnlDperType.getLayout ();
 		cards_1.show(pnlDperType, name);
+	}
+
+	public void updateCheckout (String name)
+	{
+		CardLayout cards_2 = (CardLayout) pnlCheckout.getLayout ();
+		cards_2.show(pnlCheckout, name);
 	}
 
 	public void clearDDocument ()

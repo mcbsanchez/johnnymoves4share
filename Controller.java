@@ -67,6 +67,14 @@ public class Controller implements ActionListener, ItemListener
 		{
 			gui.updateContentPane(gui.HOME);
 		}
+		else if (e.getActionCommand ().equals ("See Breakdown"))
+		{
+			gui.updateCheckout(gui.BREAKDOWN);
+		}
+		else if (e.getActionCommand ().equals ("Proceed"))
+		{
+			gui.updateContentPane(gui.HOME);
+		}
 		else if (e.getActionCommand ().equals ("Track"))
 		{
 			gui.tfTracker.setText(" ");

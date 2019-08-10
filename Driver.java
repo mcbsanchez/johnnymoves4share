@@ -7,15 +7,11 @@ import java.util.concurrent.TimeUnit;
 
 public class Driver {
 
-//    public static void main(String []args)
-//    {
-//        JMGui gui = new JMGui ();
-//        Controller controller =  new Controller(gui);
-////        gui.init();
-//    }
     public static void main(String[] args) {
         Gui gui = new Gui();
-        Controller controller = new Controller(gui);
+        Controller controller;
+        controller = new Controller(gui);
+
     }
 //        long start = System.nanoTime();
 //        Calendar cal = Calendar.getInstance();

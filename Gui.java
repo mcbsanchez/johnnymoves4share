@@ -714,6 +714,7 @@ public class Gui extends JFrame
 
 	public void resetAll ()
 	{
+
 			tfName.setText(" ");
 			cbDestination.setSelectedIndex(0);
 			tfCount.setText(" ");

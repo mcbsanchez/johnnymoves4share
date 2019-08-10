@@ -74,6 +74,7 @@ public class Controller implements ActionListener
 
 
 			}
+
 			parcels.get(0).setItems(items);
 			gui.updateContentPane(gui.CHECKOUT);
 

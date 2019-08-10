@@ -17,60 +17,6 @@ public class Parcel {
         this.countItems = countItems;
     }
 
-    /** Adds the items as long as they both have equal counts to the intialized item count
-     * @param items - ArrayList of Item that can range from 1 to * number of items
-     * @param n - number of items initialized at the start
-     */
-    public void addItems(ArrayList<Item> items, int n)
-    {
-        if(countItems == items.size())
-        {
-            setItems(items);
-            setType(n);
-        }
-        else
-            System.out.println("Invalid, number of items inconsistent");
-    }
-    /** Sets the items for the parcel
-     * @param items - ArrayList of Item that can range from 1 to * number of items
-     */
-    private void setItems (ArrayList<Item> items)
-    {
-
-        this.items = new ArrayList<>(items);
-//        System.out.println(items.get(0).getWeight());
-//        System.out.println(items.get(1).getWeight());
-//        System.out.println(items.get(2).getWeight());
-//        System.out.println(this.items.get(0).getWeight());
-//        System.out.println(this.items.get(1).getWeight());
-//        System.out.println(this.items.get(2).getWeight());
-    }
-    /**Sets the type of parcel and its dimensions
-     * @param n - number of items initialized at the start
-     */
-    private void setType(int n)
-    {
-        if(n < 2)
-        {
-            if(available[n])
-            {
-                type = PARCELTYPE[0];
-                size = SIZES[n];
-            }
-        }
-        else if(n >= 2 && n < 6)
-        {
-            if(available[n])
-            {
-                type = PARCELTYPE[1];
-                size = SIZES[n];
-            }
-        }
-        else
-        {
-            System.out.println("Invalid");
-        }
-    }
     /** Prints the available parcels and also computes for which items fit the parcel
      *
      */
@@ -265,7 +211,60 @@ public class Parcel {
         return getTotalWeight() > 3;
     }
 
+    /** Adds the items as long as they both have equal counts to the intialized item count
+     * @param items - ArrayList of Item that can range from 1 to * number of items
+     * @param n - number of items initialized at the start
+     */
+    public void addItems(ArrayList<Item> items, int n)
+    {
+        if(countItems == items.size())
+        {
+            setItems(items);
+            setType(n);
+        }
+        else
+            System.out.println("Invalid, number of items inconsistent");
+    }
+    /** Sets the items for the parcel
+     * @param items - ArrayList of Item that can range from 1 to * number of items
+     */
+    private void setItems (ArrayList<Item> items)
+    {
 
+        this.items = new ArrayList<>(items);
+//        System.out.println(items.get(0).getWeight());
+//        System.out.println(items.get(1).getWeight());
+//        System.out.println(items.get(2).getWeight());
+//        System.out.println(this.items.get(0).getWeight());
+//        System.out.println(this.items.get(1).getWeight());
+//        System.out.println(this.items.get(2).getWeight());
+    }
+    /**Sets the type of parcel and its dimensions
+     * @param n - number of items initialized at the start
+     */
+    private void setType(int n)
+    {
+        if(n < 2)
+        {
+            if(available[n])
+            {
+                type = PARCELTYPE[0];
+                size = SIZES[n];
+            }
+        }
+        else if(n >= 2 && n < 6)
+        {
+            if(available[n])
+            {
+                type = PARCELTYPE[1];
+                size = SIZES[n];
+            }
+        }
+        else
+        {
+            System.out.println("Invalid");
+        }
+    }
     /**Sets the insurance of the item to either true or false
      * @param choice either yes or no (will only be yes if inputed yes, no otherwise)
      */
@@ -278,7 +277,8 @@ public class Parcel {
         else
             insured = false;
     }
-
+    /** Generates the TrackingNumber of the Parcel
+     */
     public void generateTrackingNum() {
         if(countItems == items.size()
                 && daySent.get(Calendar.DATE) != 0
@@ -287,58 +287,52 @@ public class Parcel {
                 && type != null)
             track = new TrackNum(this);
     }
-
-    /**
-     * @return
+    //Getters
+    /** Gets the tracking number stored in the parcel
+     * @return String - which is the Tracking Number of the Parcel
      */
     public String getTrackingNum()
     {
         return track.toString();
     }
-
-    /**
+    /** Gets the Type of Parcel of the item
      * @return
      */
     public String getType()
     {
         return type;
     }
-
-    /**
-     * @return
+    /**Gets the Dimensions of the Parcel
+     * @return double[] which consist of 3, the length, width, and height
      */
     public double[] getDimensions()
     {
         return size;
     }
-
-    /**
-     * @param i
-     * @return
+    /**Gets the specific item in the parcel
+     * @param i - the index number of the item being taken from parcel
+     * @return Item that gets the contents of an Item as well
      */
     public Item getItem(int i)
     {
         return items.get(i);
     }
-
-    /**
-     * @param n
+    /**Sets the sequence number of the parcel
+     * @param n - the sequence number is being set in with this function base from the controller
      */
     public void setSequenceNumber(int n)
     {
         sequenceNumber = n;
     }
-
-    /**
-     * @return
+    /**Gets the sequence number of the parcel
+     * @return int - the sequence number is grabbed from parcel
      */
     public int getSequenceNumber()
     {
         return sequenceNumber;
     }
-
-    /**
-     * @return
+    /**Gets the total weight of the parcel
+     * @return double values of the total weight from parcel
      */
     public double getTotalWeight()
     {
@@ -350,25 +344,22 @@ public class Parcel {
         }
         return totalWeight;
     }
-
-    /**
-     * @return
+    /**Gets the destination of the parcel
+     * @return String of the destination from parcel
      */
     public String getDestination()
     {
         return destination;
     }
-
-    /**
-     * @return
+    /**Gets the number of items in the parcel
+     * @return int which is the attribute countItems in the parcel class
      */
     public int getNumOfItems()
     {
         return countItems;
     }
-
-    /**
-     * @return
+    /**Gets the base fee of the parcel
+     * @return double values of the base fee
      */
     public double getBaseFee()
     {
@@ -401,9 +392,8 @@ public class Parcel {
             return baseFee;
         }
     }
-
-    /**
-     * @return
+    /**Gets the service fee of the parcel
+     * @return double values of the base fee
      */
     public double getServiceFee()
     {
@@ -436,9 +426,8 @@ public class Parcel {
         return fee;
 
     }
-
-    /**
-     * @return
+    /**Gets the insurance fee of the parcel
+     * @return double values of the base fee
      */
     public double getInsuranceFee()
     {
@@ -447,15 +436,19 @@ public class Parcel {
         else
             return 0;
     }
-
-    /**
-     * @return
+    /**Gets the total fee of the parcel base from the base fee, insurance fee, and service fee
+     * @return double values of the total fee
      */
     public double getTotalFee()
     {
         return getBaseFee() + getInsuranceFee() + getServiceFee();
     }
-
+    /**This method shows the breakdown using different fees which are
+     *  base fee
+     *  insurance fee
+     *  service fee
+     *  and total fee
+     */
     public void showBreakdown()
     {
         System.out.printf("     Base Fee \t %.2f \n", getBaseFee());
@@ -464,17 +457,15 @@ public class Parcel {
         System.out.println("--------------\t----------------------");
         System.out.printf("    Total Fee \t %.2f \n", getTotalFee());
     }
-
-    /**
-     * @return
+    /**Gets the recipient's name in the parcel
+     * @return String which is the recipient's name
      */
     public String getRecipient()
     {
         return recipient;
     }
-
-    /**
-     * @param cal
+    /**Sets the time the parcel was processed, along with the estimated delivery day
+     * @param cal - current day simulated in the parcel's creation
      */
     public void setTime(Calendar cal) {
 
@@ -489,26 +480,23 @@ public class Parcel {
         else if(getDestination().equalsIgnoreCase("Mindanao"))
             dayReceived.add(Calendar.DAY_OF_MONTH,8);
     }
-
-    /**
-     * @return
+    /**Gets the month of the parcel's creation
+     * @return int values of the month
      */
     public int getMonth()
     {
         return daySent.get(Calendar.MONTH)+1;
     }
-
-    /**
-     * @return
+    /**Gets the day of the parcel's creation
+     * @return int values of the day
      */
     public int getDay()
     {
         return daySent.get(Calendar.DAY_OF_MONTH);
     }
-
-    /**
-     * @param cal
-     * @return
+    /**Checks the status of the parcel from PROCESSING, SHIPPING, and DELIVERED
+     * @param cal - date that is being compared to the day the parcel was processed and received
+     * @return String which are PROCESSING, SHIPPING, and DELIVERED
      */
     public String viewStatusToday(Calendar cal)
     {
@@ -545,9 +533,18 @@ public class Parcel {
 
     }
 
-
-    /**
+    //Attributes
+    /**DESTINATIONS
+     * SIZES
+     * PARCELTYPE
+     * CURRENTSTATUS
      *
+     * recipient - initialized in the constructor
+     * destination - initialized in the constructor
+     * countItems - initialized in the constructor
+     *
+     * available
+     * 
      */
     private static String[] DESTINATIONS = {"Metro Manila","Provincial Luzon", "Visayas", "Mindanao"};
     private double[][] SIZES = {{9, 14, 1}, {12, 18, 3}, {12, 10, 5}, {14, 11, 7}, {18, 12, 9}, {20, 16, 12}};

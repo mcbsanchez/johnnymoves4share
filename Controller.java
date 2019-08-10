@@ -1,9 +1,11 @@
 import java.awt.event.*;
-import java.util.ArrayList;
+import java.util.*;
 
-public class Controller implements ActionListener, ItemListener
+public class Controller implements ActionListener
 {
 	private Gui gui;
+	private ArrayList<Parcel> parcels = new ArrayList<>();
+	private ArrayList<Item> items = new ArrayList<> ();
 
 	public Controller (Gui gui)
 	{
@@ -11,14 +13,13 @@ public class Controller implements ActionListener, ItemListener
 		this.gui.addListeners(this);
 	}
 
-	ArrayList<Parcel> p = new ArrayList<>();
-	ArrayList<Item> i = new ArrayList<>();
-	String password = "animo!";
-	int a = 0;
 
 	// ActionListener
 	public void actionPerformed (ActionEvent e)
 	{
+		int i;
+
+		Item temp = null;
 
 		if (e.getActionCommand ().equals ("Create Parcel"))
 		{
@@ -27,6 +28,7 @@ public class Controller implements ActionListener, ItemListener
 		else if (e.getActionCommand ().equals ("Track Parcel"))
 		{
 			gui.updateContentPane(gui.TRACK);
+
 		}
 		else if (e.getActionCommand ().equals ("Exit Program"))
 		{
@@ -34,12 +36,13 @@ public class Controller implements ActionListener, ItemListener
 		}
 		else if (e.getActionCommand().equals ("Add Items"))
 		{
-			ArrayList<Item> i = new ArrayList<>();
-			p.add(new Parcel(gui.tfName.getText(),
-					gui.cbDestination.getSelectedItem().toString(),
-					Integer.parseInt((gui.tfCount.getText()))));
+			if (!gui.getDestination().equals("--- choose ---") && gui.getNum() > 0)
+			{
 
-			gui.updateContentPane(gui.CREATE);
+				parcels.add(new Parcel (gui.getName(),gui.getDestination(),gui.getNum()));
+			}
+			else
+				gui.updateContentPane (gui.SETUP);
 		}
 		else if (e.getActionCommand ().equals ("Document"))
 		{
@@ -55,27 +58,36 @@ public class Controller implements ActionListener, ItemListener
 		}
 		else if (e.getActionCommand ().equals ("Add Item"))
 		{
-			if(p.get(a).getNumOfItems() != i.size())
+			for (i = 0; i < parcels.get(0).getNumOfItems(); i++)
 			{
-				if (gui.rdbtnDocument.isSelected()) {
-					i.add(new Document(Integer.parseInt(gui.tfDLength.getText()),
-							Integer.parseInt(gui.tfDWidth.getText()),
-							Integer.parseInt(gui.tfDPages.getText())));
-					gui.radiobtns.clearSelection();
-					gui.clearDDocument();
-				} else if (gui.rdbtnProduct.isSelected()) {
-					i.add(new Product(Integer.parseInt(gui.tfILength.getText()),
-							Integer.parseInt(gui.tfPWidth.getText()),
-							Integer.parseInt(gui.tfPHeight.getText()),
-							Integer.parseInt(gui.tfPWeight.getText())));
-					gui.radiobtns.clearSelection();
-					gui.clearDProduct();
+				gui.updateContentPane(gui.CREATE);
+				try
+				{
+					temp = gui.createItem();
+				} catch (Exception ex) {
 
-				} else if (gui.rdbtnIrregular.isSelected()) {
-					gui.radiobtns.clearSelection();
-					gui.clearDIrregular();
 				}
-				a++;
+				items.add(temp);
+				gui.resetAll();
+			}
+			parcels.get(i).setItems(items);
+			gui.updateContentPane(gui.CHECKOUT);
+
+			if (gui.rdbtnDocument.isSelected())
+			{
+				gui.radiobtns.clearSelection();
+				gui.clearDDocument();
+			}
+			else if (gui.rdbtnProduct.isSelected())
+			{
+				gui.radiobtns.clearSelection();
+				gui.clearDProduct();
+
+			}
+			else if (gui.rdbtnIrregular.isSelected())
+			{
+				gui.radiobtns.clearSelection();
+				gui.clearDIrregular();
 			}
 			gui.radiobtns.clearSelection();
 			gui.updateDperType (gui.BLANK);
@@ -98,19 +110,7 @@ public class Controller implements ActionListener, ItemListener
 		}
 		else if (e.getActionCommand ().equals ("Exit Program"))
 		{
-			if(gui.pfPassword.getPassword().toString().equalsIgnoreCase(password)) {
-			}
 			gui.updateContentPane(gui.HOME);
-		}
-
-	}
-
-	@Override
-	public void itemStateChanged(ItemEvent e)
-	{
-		if (e.getStateChange () == ItemEvent.SELECTED)
-		{
-
 		}
 
 	}

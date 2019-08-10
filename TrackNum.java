@@ -5,7 +5,8 @@
  */
 public class TrackNum
 {
-	/**
+	//Constructor
+	/**Constructor for TrackNum
 	 * @param p is the parcel, which is used by the Parcel class as "this"
 	 */
 	public TrackNum (Parcel p)
@@ -53,15 +54,22 @@ public class TrackNum
 
 	}
 
-	/**
-	 * @return
+	/**toString function that return the String of the tracker id
+	 * @return String including the
+	 * parcelType of either FLT or BOX,
+	 * Month and Day in MMDD format,
+	 * destinationCode of either MNL, LUZ, VIS, or MIN,
+	 * The max number of parcels, and the concurrent item of the day
 	 */
 	public String toString()
 	{
 		return parcelType + month + day + destinationCode + max + seq;
 	}
 	
-	
+	//Atributes
+	/**
+	 * These atributes rely heavily on a fully completed Parcel
+	 */
 	private String				parcelType;
 	private String				month;
 	private String				day;

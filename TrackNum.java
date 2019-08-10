@@ -23,32 +23,25 @@ public class TrackNum
 			this.day = Integer.toString(p.getDay());
 
 		if (p.getDestination().equalsIgnoreCase("Metro Manila"))
-		{
 			destinationCode = "MML";
-		}
 		else if (p.getDestination().equalsIgnoreCase("Luzon"))
-		{
 			destinationCode = "LUZ";
-		}
 		else if (p.getDestination().equalsIgnoreCase("Visayas"))
-		{
 			destinationCode = "VIS";
-		}
 		else if (p.getDestination().equalsIgnoreCase("Mindanao"))
-		{
 			destinationCode = "MIN";
-		}
 
-		max = p.getNumOfItems();
+		if(p.getNumOfItems() < 10)
+			max = "0"+p.getNumOfItems();
+		else
+			max = ""+p.getNumOfItems();
+
 
 		if(p. getSequenceNumber() < 10)
-		{
 			seq = "0"+"0"+p.getSequenceNumber();
-		}
 		else if(p.getSequenceNumber() < 100)
-		{
 			seq = "0"+p.getSequenceNumber();
-		}
+
 
 
 
@@ -74,6 +67,6 @@ public class TrackNum
 	private String				month;
 	private String				day;
 	private String              destinationCode;
-	private int                 max;
+	private String              max;
 	private String				seq;
 }

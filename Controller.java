@@ -1,37 +1,29 @@
 import java.awt.event.*;
 import java.util.*;
 
-public class Controller implements ActionListener, ItemListener
+public class Controller implements ActionListener
 {
 	private Gui gui;
 	private ArrayList<Parcel> parcels = new ArrayList<>();
 	private ArrayList<Item> items = new ArrayList<> ();
 
-	public Controller (Gui gui, Parcel parcel)
+	public Controller (Gui gui)
 	{
 		this.gui = gui;
 		this.gui.addListeners(this);
 	}
 
 
-
-
 	// ActionListener
 	public void actionPerformed (ActionEvent e)
 	{
 		int i;
-		int countItems = gui.getNum();
+
+		Item temp = null;
 
 		if (e.getActionCommand ().equals ("Create Parcel"))
 		{
 			gui.updateContentPane (gui.SETUP);
-			if (!gui.getDestination().equals("--- choose ---") && gui.getNum() > 0)
-			{
-
-				parcels.add(new Parcel (gui.getName(),gui.getDestination(),gui.getNum()));
-			}
-			else
-				gui.updateContentPane (gui.SETUP);
 		}
 		else if (e.getActionCommand ().equals ("Track Parcel"))
 		{
@@ -44,13 +36,13 @@ public class Controller implements ActionListener, ItemListener
 		}
 		else if (e.getActionCommand().equals ("Add Items"))
 		{
-			for (i = 0; i < countItems; i++)
+			if (!gui.getDestination().equals("--- choose ---") && gui.getNum() > 0)
 			{
-				gui.updateContentPane(gui.CREATE);
-				items.add(gui.createItem());
-				//reset values
-
+				parcels.add(new Parcel (gui.getName(),gui.getDestination(),gui.getNum()));
+				gui.updateContentPane (gui.CREATE);
 			}
+			else
+				gui.updateContentPane (gui.SETUP);
 		}
 		else if (e.getActionCommand ().equals ("Document"))
 		{
@@ -66,6 +58,21 @@ public class Controller implements ActionListener, ItemListener
 		}
 		else if (e.getActionCommand ().equals ("Add Item"))
 		{
+			for (i = 0; i < parcels.get(0).getNumOfItems(); i++)
+			{
+				gui.updateContentPane(gui.CREATE);
+				try
+				{
+					temp = gui.createItem();
+				} catch (Exception ex) {
+
+				}
+				items.add(temp);
+				gui.resetAll();
+			}
+			parcels.get(0).setItems(items);
+			gui.updateContentPane(gui.CHECKOUT);
+
 			if (gui.rdbtnDocument.isSelected())
 			{
 				gui.radiobtns.clearSelection();
@@ -107,6 +114,5 @@ public class Controller implements ActionListener, ItemListener
 		}
 
 	}
-
 
 }

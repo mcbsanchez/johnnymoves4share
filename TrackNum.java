@@ -58,7 +58,7 @@ public class TrackNum
 	{
 		return parcelType + month + day + destinationCode + max + seq;
 	}
-	
+
 	//Atributes
 	/**
 	 * These atributes rely heavily on a fully completed Parcel

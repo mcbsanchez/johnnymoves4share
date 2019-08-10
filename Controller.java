@@ -16,7 +16,7 @@ public class Controller implements ActionListener, ItemListener
 
 		if (e.getActionCommand ().equals ("Create Parcel"))
 		{
-			gui.updateContentPane (gui.CREATE);
+			gui.updateContentPane (gui.SETUP);
 		}
 		else if (e.getActionCommand ().equals ("Track Parcel"))
 		{
@@ -25,6 +25,10 @@ public class Controller implements ActionListener, ItemListener
 		else if (e.getActionCommand ().equals ("Exit Program"))
 		{
 			gui.updateContentPane (gui.EXIT);
+		}
+		else if (e.getActionCommand().equals ("Add Items"))
+		{
+			gui.updateContentPane(gui.CREATE);
 		}
 		else if (e.getActionCommand ().equals ("Document"))
 		{

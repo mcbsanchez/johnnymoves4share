@@ -18,12 +18,15 @@ import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class Gui extends JFrame
 {
 
 	public final String BLANK = "Blank";
 	public final String HOME = "Home";
+	public final String SETUP = "Setup";
 	public final String CREATE = "Create Parcel";
 	public final String TRACK = "Track Parcel";
 	public final String EXIT = "Exit Program";
@@ -34,8 +37,8 @@ public class Gui extends JFrame
 
 	private JPanel contentPane;
 	private JPanel pnlHome;
+	private JPanel pnlSetup;
 	private JPanel pnlCreate;
-	private JPanel pnlCount;
 	private JPanel pnlChoose;
 	private JPanel pnlTypes;
 	private JPanel pnlDimensions;
@@ -55,7 +58,7 @@ public class Gui extends JFrame
 	private JButton btnCreate;
 	private JButton btnTrackParcel;
 	private JButton btnExitProgram;
-	private JButton btnEnter;
+	private JButton btnAddItems;
 	private JButton btnDAddItem;
 	private JButton btnPAdd;
 	private JButton btnIAdd;
@@ -71,6 +74,8 @@ public class Gui extends JFrame
 	public JRadioButton rdbtnProduct;
 	public JRadioButton rdbtnDocument;
 
+
+	private JTextField tfName;
 	public JTextField tfCount;
 	private JTextField tfDLength;
 	private JTextField tfDWidth;
@@ -91,6 +96,9 @@ public class Gui extends JFrame
 	public JPasswordField pfPassword;
 
 	private JLabel lblTracking;
+	private JLabel LBL;
+	private JLabel lblNameOfRecipient;
+	private JLabel lblDestination;
 
 
 	/**
@@ -100,7 +108,7 @@ public class Gui extends JFrame
 	{
 		super ("Johnny Moves");
 		initialize();
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 500, 500);
 		setResizable(false);
 		setVisible (true);
@@ -126,15 +134,15 @@ public class Gui extends JFrame
 		pnlHome.add(lblJohnnyMoves);
 
 		btnCreate = new JButton("Create Parcel");
-		btnCreate.setBounds(47, 381, 100, 50);
+		btnCreate.setBounds(20, 381, 125, 50);
 		pnlHome.add(btnCreate);
 
 		btnTrackParcel = new JButton("Track Parcel");
-		btnTrackParcel.setBounds(194, 381, 100, 50);
+		btnTrackParcel.setBounds(182, 381, 125, 50);
 		pnlHome.add(btnTrackParcel);
 
 		btnExitProgram = new JButton("Exit Program");
-		btnExitProgram.setBounds(341, 381, 100, 50);
+		btnExitProgram.setBounds(345, 381, 125, 50);
 		pnlHome.add(btnExitProgram);
 
 		taReport = new JTextArea();
@@ -144,23 +152,54 @@ public class Gui extends JFrame
 		taReport.setBounds(20, 134, 450, 200);
 		pnlHome.add(taReport);
 
+		// CREATE (SET-UP)
+		pnlSetup = new JPanel();
+		contentPane.add(pnlSetup, SETUP);
+		pnlSetup.setLayout(null);
+
+		JLabel lblCount = new JLabel("Number of items to include in the parcel:");
+		lblCount.setBounds(40, 254, 259, 16);
+		pnlSetup.add(lblCount);
+
+		tfCount = new JTextField();
+		tfCount.setBounds(325, 249, 96, 26);
+		pnlSetup.add(tfCount);
+		tfCount.setColumns(5);
+
+		btnAddItems = new JButton("Add Items");
+		btnAddItems.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		btnAddItems.setBounds(182, 337, 125, 50);
+		pnlSetup.add(btnAddItems);
+
+		LBL = new JLabel("CREATE");
+		LBL.setHorizontalAlignment(SwingConstants.CENTER);
+		LBL.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 42));
+		LBL.setBounds(6, 6, 478, 93);
+		pnlSetup.add(LBL);
+
+		lblNameOfRecipient = new JLabel("Name of Recipient");
+		lblNameOfRecipient.setBounds(40, 130, 120, 16);
+		pnlSetup.add(lblNameOfRecipient);
+
+		lblDestination = new JLabel("Parcel Destination");
+		lblDestination.setBounds(40, 192, 142, 16);
+		pnlSetup.add(lblDestination);
+
+		tfName = new JTextField();
+		tfName.setBounds(181, 125, 240, 26);
+		pnlSetup.add(tfName);
+		tfName.setColumns(25);
+
+		JComboBox<String> cbDestination = new JComboBox<String>();
+		cbDestination.setModel(new DefaultComboBoxModel<String>(new String[] {"Metro Manila (MML)", "Luzon (LUZ)", "Visayas (VIS)", "Mindanao (MIN)"}));
+		cbDestination.setMaximumRowCount(4);
+		cbDestination.setBounds(181, 187, 240, 27);
+		pnlSetup.add(cbDestination);
+
 		// CREATE
 		pnlCreate = new JPanel();
 		contentPane.add(pnlCreate, CREATE);
 		pnlCreate.setLayout(new BorderLayout(0, 0));
-
-		pnlCount = new JPanel();
-		pnlCreate.add(pnlCount, BorderLayout.NORTH);
-
-		JLabel lblCount = new JLabel("Number of items to include in the parcel:");
-		pnlCount.add(lblCount);
-
-		tfCount = new JTextField();
-		pnlCount.add(tfCount);
-		tfCount.setColumns(5);
-
-		btnEnter = new JButton("Enter");
-		pnlCount.add(btnEnter);
 
 		spltAdd = new JSplitPane();
 		pnlCreate.add(spltAdd, BorderLayout.CENTER);
@@ -227,40 +266,40 @@ public class Gui extends JFrame
 		pnlDocument.setLayout(null);
 
 		JLabel lblDLength = new JLabel("Length");
-		lblDLength.setBounds(40, 60, 61, 16);
+		lblDLength.setBounds(40, 89, 61, 16);
 		pnlDocument.add(lblDLength);
 
 		tfDLength = new JTextField();
-		tfDLength.setBounds(128, 55, 130, 26);
+		tfDLength.setBounds(128, 84, 130, 26);
 		pnlDocument.add(tfDLength);
 		tfDLength.setColumns(10);
 
 		JLabel lblDWidth = new JLabel("Width");
-		lblDWidth.setBounds(40, 127, 61, 16);
+		lblDWidth.setBounds(40, 162, 61, 16);
 		pnlDocument.add(lblDWidth);
 
 		tfDWidth = new JTextField();
 		tfDWidth.setColumns(10);
-		tfDWidth.setBounds(128, 122, 130, 26);
+		tfDWidth.setBounds(128, 157, 130, 26);
 		pnlDocument.add(tfDWidth);
 
 		JLabel lblDNoOfPages = new JLabel("No. of Pages");
-		lblDNoOfPages.setBounds(40, 195, 79, 16);
+		lblDNoOfPages.setBounds(37, 235, 79, 16);
 		pnlDocument.add(lblDNoOfPages);
 
 		tfDPages = new JTextField();
 		tfDPages.setColumns(10);
-		tfDPages.setBounds(131, 190, 130, 26);
+		tfDPages.setBounds(128, 230, 130, 26);
 		pnlDocument.add(tfDPages);
 
 		btnDAddItem = new JButton("Add Item");
-		btnDAddItem.setBounds(96, 272, 117, 29);
+		btnDAddItem.setBounds(96, 295, 117, 29);
 		pnlDocument.add(btnDAddItem);
 
 		JLabel lblDInput = new JLabel("Please input the following dimensions in INCHES");
 		lblDInput.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDInput.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-		lblDInput.setBounds(19, 19, 272, 16);
+		lblDInput.setBounds(19, 34, 272, 16);
 		pnlDocument.add(lblDInput);
 
 		pnlProduct = new JPanel();
@@ -318,39 +357,39 @@ public class Gui extends JFrame
 		pnlIrregular.setLayout(null);
 
 		JLabel lblILength = new JLabel("Length");
-		lblILength.setBounds(43, 62, 61, 16);
+		lblILength.setBounds(43, 69, 61, 16);
 		pnlIrregular.add(lblILength);
 
 		tfILength = new JTextField();
 		tfILength.setColumns(10);
-		tfILength.setBounds(131, 57, 130, 26);
+		tfILength.setBounds(131, 64, 130, 26);
 		pnlIrregular.add(tfILength);
 
 		JLabel lblIWidth = new JLabel("Width");
-		lblIWidth.setBounds(43, 116, 61, 16);
+		lblIWidth.setBounds(43, 124, 61, 16);
 		pnlIrregular.add(lblIWidth);
 
 		tfIWidth = new JTextField();
 		tfIWidth.setColumns(10);
-		tfIWidth.setBounds(131, 111, 130, 26);
+		tfIWidth.setBounds(131, 119, 130, 26);
 		pnlIrregular.add(tfIWidth);
 
 		JLabel lblIHeight = new JLabel("Height");
-		lblIHeight.setBounds(43, 170, 61, 16);
+		lblIHeight.setBounds(43, 176, 61, 16);
 		pnlIrregular.add(lblIHeight);
 
 		tfIHeight = new JTextField();
 		tfIHeight.setColumns(10);
-		tfIHeight.setBounds(131, 165, 130, 26);
+		tfIHeight.setBounds(131, 171, 130, 26);
 		pnlIrregular.add(tfIHeight);
 
 		JLabel lblIWeight = new JLabel("Weight");
-		lblIWeight.setBounds(43, 224, 61, 16);
+		lblIWeight.setBounds(43, 233, 61, 16);
 		pnlIrregular.add(lblIWeight);
 
 		tfIWeight = new JTextField();
 		tfIWeight.setColumns(10);
-		tfIWeight.setBounds(131, 219, 130, 26);
+		tfIWeight.setBounds(131, 228, 130, 26);
 		pnlIrregular.add(tfIWeight);
 
 		btnIAdd = new JButton("Add Item");
@@ -360,7 +399,7 @@ public class Gui extends JFrame
 		JLabel lblIInput = new JLabel("Please input the following with the largest dimensions for each in INCHES");
 		lblIInput.setHorizontalAlignment(SwingConstants.CENTER);
 		lblIInput.setFont(new Font("Lucida Grande", Font.PLAIN, 8));
-		lblIInput.setBounds(6, 19, 298, 26);
+		lblIInput.setBounds(6, 20, 298, 26);
 		pnlIrregular.add(lblIInput);
 
 		// DONE ADDING
@@ -459,7 +498,7 @@ public class Gui extends JFrame
 		btnCreate.addActionListener((ActionListener) listener);
 		btnTrackParcel.addActionListener((ActionListener) listener);
 		btnExitProgram.addActionListener((ActionListener) listener);
-		btnEnter.addActionListener((ActionListener) listener);
+		btnAddItems.addActionListener((ActionListener) listener);
 		btnDAddItem.addActionListener((ActionListener) listener);;
 		btnPAdd.addActionListener((ActionListener) listener);
 		btnIAdd.addActionListener((ActionListener) listener);

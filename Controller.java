@@ -1,6 +1,7 @@
 import java.awt.event.*;
 import java.util.*;
 
+
 public class Controller implements ActionListener, ItemListener
 {
 	private Gui gui;
@@ -13,7 +14,10 @@ public class Controller implements ActionListener, ItemListener
 		this.gui.addListeners(this);
 	}
 
-
+// 	ArrayList<Parcel> p = new ArrayList<>();
+// 	ArrayList<Item> i = new ArrayList<>();
+// 	String password = "animo!";
+// 	int a = 0;
 
 
 	// ActionListener
@@ -66,21 +70,27 @@ public class Controller implements ActionListener, ItemListener
 		}
 		else if (e.getActionCommand ().equals ("Add Item"))
 		{
-			if (gui.rdbtnDocument.isSelected())
+			if(p.get(a).getNumOfItems() != i.size())
 			{
-				gui.radiobtns.clearSelection();
-				gui.clearDDocument();
-			}
-			else if (gui.rdbtnProduct.isSelected())
-			{
-				gui.radiobtns.clearSelection();
-				gui.clearDProduct();
+				if (gui.rdbtnDocument.isSelected()) {
+					i.add(new Document(Integer.parseInt(gui.tfDLength.getText()),
+							Integer.parseInt(gui.tfDWidth.getText()),
+							Integer.parseInt(gui.tfDPages.getText())));
+					gui.radiobtns.clearSelection();
+					gui.clearDDocument();
+				} else if (gui.rdbtnProduct.isSelected()) {
+					i.add(new Product(Integer.parseInt(gui.tfILength.getText()),
+							Integer.parseInt(gui.tfPWidth.getText()),
+							Integer.parseInt(gui.tfPHeight.getText()),
+							Integer.parseInt(gui.tfPWeight.getText())));
+					gui.radiobtns.clearSelection();
+					gui.clearDProduct();
 
-			}
-			else if (gui.rdbtnIrregular.isSelected())
-			{
-				gui.radiobtns.clearSelection();
-				gui.clearDIrregular();
+				} else if (gui.rdbtnIrregular.isSelected()) {
+					gui.radiobtns.clearSelection();
+					gui.clearDIrregular();
+				}
+				a++;
 			}
 			gui.radiobtns.clearSelection();
 			gui.updateDperType (gui.BLANK);
@@ -103,6 +113,8 @@ public class Controller implements ActionListener, ItemListener
 		}
 		else if (e.getActionCommand ().equals ("Exit Program"))
 		{
+			if(gui.pfPassword.getPassword().toString().equalsIgnoreCase(password)) {
+			}
 			gui.updateContentPane(gui.HOME);
 		}
 

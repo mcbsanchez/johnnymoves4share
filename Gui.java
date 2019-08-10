@@ -83,19 +83,19 @@ public class Gui extends JFrame
 	public JRadioButton rdbtnDocument;
 
 
-	private JTextField tfName;
+	public JTextField tfName;
 	public JTextField tfCount;
-	private JTextField tfDLength;
-	private JTextField tfDWidth;
-	private JTextField tfDPages;
-	private JTextField tfPLength;
-	private JTextField tfPWidth;
-	private JTextField tfPHeight;
-	private JTextField tfPWeight;
-	private JTextField tfILength;
-	private JTextField tfIWidth;
-	private JTextField tfIHeight;
-	private JTextField tfIWeight;
+	public JTextField tfDLength;
+	public JTextField tfDWidth;
+	public JTextField tfDPages;
+	public JTextField tfPLength;
+	public JTextField tfPWidth;
+	public JTextField tfPHeight;
+	public JTextField tfPWeight;
+	public JTextField tfILength;
+	public JTextField tfIWidth;
+	public JTextField tfIHeight;
+	public JTextField tfIWeight;
 	public JTextField tfTracker;
 
 	public JTextArea taReport;

@@ -36,7 +36,7 @@ public class Gui extends JFrame
 	public final String CHECKOUT = "Checkout";
 	public final String INSURE = "Insure";
 	public final String BREAKDOWN = "Breakdown";
-	public final String DONE = "Done";
+	//public final String DONE = "Done";
 
 	private JPanel contentPane;
 	private JPanel pnlHome;
@@ -620,5 +620,84 @@ public class Gui extends JFrame
 		tfIWidth.setText(" ");
 		tfIHeight.setText(" ");
 		tfIWeight.setText(" ");
+	}
+
+	// PARCEL INITIALIZATION
+	public String getName()
+	{
+		return tfName.getText().;
+	}
+
+	public String getDestination()
+	{
+		if (cbDestination.getSelectedItem().toString().equals("Metro Manila (MML)"))
+		{
+			return "MML";
+		}
+		else if (cbDestination.getSelectedItem().toString().equals("Luzon (LUZ)"))
+		{
+			return "LUZ";
+		}
+		else if (cbDestination.getSelectedItem().toString().equals("Visayas (VIS)"))
+		{
+			return "VIS";
+		}
+		else if (cbDestination.getSelectedItem().toString().equals("Mindanao (MIN)"))
+		{
+			return "MIN";
+		}
+		else
+			return "--- choose ---";
+	}
+
+	public int getNum ()
+	{
+		return Integer.parseInt(tfCount.getText());
+	}
+
+	public Item createItem ()
+	{
+		Item item;
+
+		int pages;
+		double length, width, height, weight;
+
+			if (rdbtnDocument.getSelectedObjects().toString().equals("Document"))
+			{
+				length = Double.parseDouble(tfDLength.getText());
+				width = Double.parseDouble(tfDWidth.getText());
+				pages = Integer.parseInt(tfDPages.getText());
+
+				if (length > 0 && width > 0 && pages > 0)
+					item = new Document(length, width, pages);
+			}
+
+			else if (rdbtnProduct.getSelectedObjects().toString().equals("Product"))
+			{
+				length = Double.parseDouble(tfPLength.getText());
+				width = Double.parseDouble(tfPWidth.getText());
+				height = Double.parseDouble(tfPHeight.getText());
+				weight = Double.parseDouble(tfPWeight.getText());
+
+
+				if (length > 0 && width > 0 && height > 0 && weight > 0)
+					item = new Product(length, width, height, weight);
+			}
+
+			else if (rdbtnIrregular.getSelectedObjects().toString().equals("Irregular Product"))
+			{
+				length = Double.parseDouble(tfILength.getText());
+				width = Double.parseDouble(tfIWidth.getText());
+				height = Double.parseDouble(tfIHeight.getText());
+				weight = Double.parseDouble(tfIWeight.getText());
+
+
+				if (length > 0 && width > 0 && height > 0 && weight > 0)
+					item = new Irregular(length, width, height, weight);
+			}
+
+			return item;
+
+		}
 	}
 }

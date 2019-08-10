@@ -60,27 +60,28 @@ public class Gui extends JFrame
 
 	private JSplitPane spltAdd;
 
-	public JButton btnCreate;
-	public JButton btnTrackParcel;
-	public JButton btnExitProgram;
-	public JButton btnAddItems;
-	public JButton btnDAddItem;
-	public JButton btnPAdd;
-	public JButton btnIAdd;
-	public JButton btnBackToMenu;
-	public JButton btnBreakdown;
-	public JButton btnBackToMenu_2;
-	public JButton btnProceed;
-	public JButton btnTrack;
-	public JButton btnTBackToMenu;
-	public JButton btnExitPass;
-	public JButton btnEBackToMenu;
+	private JButton btnCreate;
+	private JButton btnTrackParcel;
+	private JButton btnExitProgram;
+	private JButton btnAddItems;
+	private JButton btnDAddItem;
+	private JButton btnPAdd;
+	private JButton btnIAdd;
+	private JButton btnBackToMenu;
+	private JButton btnBreakdown;
+	private JButton btnBackToMenu_2;
+	private JButton btnProceed;
+	private JButton btnTrack;
+	private JButton btnTBackToMenu;
+	private JButton btnBackToMenu_1;
+	private JButton btnExitPass;
+	private JButton btnEBackToMenu;
 
 	public ButtonGroup radiobtns;
 
-	public JRadioButton rdbtnIrregular;
-	public JRadioButton rdbtnProduct;
-	public JRadioButton rdbtnDocument;
+	private JRadioButton rdbtnIrregular;
+	private JRadioButton rdbtnProduct;
+	private JRadioButton rdbtnDocument;
 
 
 	private JTextField tfName;
@@ -101,18 +102,19 @@ public class Gui extends JFrame
 	private JTextArea taReport;
 	private JTextArea taTracked;
 
-	public JPasswordField pfPassword;
+	private JPasswordField pfPassword;
 
 	private JLabel lblTracking;
 	private JLabel LBL;
 	private JLabel lblNameOfRecipient;
 	private JLabel lblDestination;
-	private JButton btnBackToMenu_1;
+
 	private JLabel lblCreate_1;
 	private JLabel lblBreakdownOfFees;
 	private JLabel lblBreakdown;
 
-	public JComboBox<String> cbDestination;
+	private JComboBox<String> cbDestination;
+	private JComboBox<String> comboBox;
 	
 	/**
 	 * Create the application.
@@ -441,7 +443,7 @@ public class Gui extends JFrame
 		lblAvailableParcels.setBounds(52, 169, 115, 16);
 		pnlInsure.add(lblAvailableParcels);
 
-		JComboBox<String> comboBox = new JComboBox<>();
+		comboBox = new JComboBox<>();
 		comboBox.setModel(new DefaultComboBoxModel<>(new String[] {"----- choose -----"}));
 		comboBox.setBounds(213, 164, 228, 27);
 		pnlInsure.add(comboBox);
@@ -573,6 +575,7 @@ public class Gui extends JFrame
 		btnProceed.addActionListener((ActionListener) listener);
 		btnTrack.addActionListener((ActionListener) listener);
 		btnTBackToMenu.addActionListener((ActionListener) listener);
+		btnBackToMenu_1.addActionListener((ActionListener) listener);
 		btnExitPass.addActionListener((ActionListener) listener);
 		btnEBackToMenu.addActionListener((ActionListener) listener);
 
@@ -737,5 +740,10 @@ public class Gui extends JFrame
 	public void setTracker (String s)
 	{
 		tfTracker.setText(s);
+	}
+
+	public JComboBox<String> getCombo ()
+	{
+		return comboBox;
 	}
 }

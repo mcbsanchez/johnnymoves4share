@@ -91,10 +91,13 @@ public class Controller implements ActionListener
 				gui.updateContentPane(gui.CREATE);
 				gui.resetAll();
 
-
 			}
 
 			parcels.get(0).setItems(items);
+			// put available sizes in combobox
+
+			// gui.getCombo().add(/* dito ata yung isang string ng sizes tas nakaloop kung marami*/)
+
 			gui.updateContentPane(gui.CHECKOUT);
 
 		}
